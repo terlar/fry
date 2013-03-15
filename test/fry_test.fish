@@ -14,67 +14,42 @@ it 'returns status from command'; begin
   end
 end
 
-context 'without args'; begin
-  function subject
-    fry
-  end
+it 'outputs rubies without args'; begin
+  stub fry-rubies '::rubies::'
 
-  it 'outputs rubies'; begin
-    stub fry-rubies '::rubies::'
-
-    if test (subject) = '::rubies::'
-      pass
-    else
-      fail
-    end
+  if test (fry) = '::rubies::'
+    pass
+  else
+    fail
   end
 end
 
-context 'with unknown command'; begin
-  function subject
-    fry unknown
-  end
+it 'outputs help with unknown command'; begin
+  stub fry-help '::help::'
 
-  it 'outputs help'; begin
-    stub fry-help '::help::'
-
-    if test (subject) = '::help::'
-      pass
-    else
-      fail
-    end
+  if test (fry unknown) = '::help::'
+    pass
+  else
+    fail
   end
 end
 
-context 'with known command'; begin
-  function subject
-    fry version
-  end
+it 'outputs command with known command'; begin
+  stub fry-version ::version::
 
-  it 'outputs command'; begin
-    stub fry-version ::version::
-
-    if test (subject) = '::version::'
-      pass
-    else
-      fail
-    end
+  if test (fry version) = '::version::'
+    pass
+  else
+    fail
   end
 end
 
-context 'with known ruby'; begin
-  function subject
-    fry dummy-1
-  end
+it 'switches ruby with known ruby'; begin
+  stub fry-use ::use::
 
-  it 'switches ruby'; begin
-    stub fry-use ::use::
-
-    if test (subject) = '::use::'
-      pass
-    else
-      fail
-    end
+  if test (fry dummy-1) = '::use::'
+    pass
+  else
+    fail
   end
 end
-

@@ -20,7 +20,7 @@ it 'contains rubies'; begin
   end
 end
 
-it 'contains current'; begin
+it 'highlights current'; begin
   stub fry-current dummy-1
 
   if contains '30mBm*32m dummy-1' (subject)
