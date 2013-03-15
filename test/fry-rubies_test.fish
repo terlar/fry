@@ -1,11 +1,17 @@
 . helper.fish
 
 function subject
-  fry-rubies | col
+  fry-rubies
 end
 
 it 'contains system'; begin
-  if contains '*32m system' (subject)
+  function result
+    echo -n '*'
+    set_color green
+    echo -n ' system'
+  end
+
+  if contains (result) (subject)
     pass
   else
     fail
@@ -13,7 +19,12 @@ it 'contains system'; begin
 end
 
 it 'contains rubies'; begin
-  if contains '30mBm  dummy-1' (subject)
+  function result
+    set_color normal
+    echo -n '  dummy-1'
+  end
+
+  if contains (result) (subject)
     pass
   else
     fail
@@ -21,9 +32,16 @@ it 'contains rubies'; begin
 end
 
 it 'highlights current'; begin
+  function result
+    set_color normal
+    echo -n '*'
+    set_color green
+    echo -n ' dummy-1'
+  end
+
   stub fry-current dummy-1
 
-  if contains '30mBm*32m dummy-1' (subject)
+  if contains (result) (subject)
     pass
   else
     fail
