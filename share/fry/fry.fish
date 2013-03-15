@@ -3,6 +3,10 @@ if not set -q fry_rubies
   set -gx fry_rubies $HOME/.rubies
 end
 
+if not set -q fry_auto_switch
+  set -U fry_auto_switch 0
+end
+
 if not contains $fry_path/functions $fish_function_path
   set fish_function_path $fry_path/functions $fish_function_path
 end
@@ -12,7 +16,7 @@ if not contains $fry_path/completions $fish_complete_path
 end
 
 # Auto-switch
-if set -q fry_auto_switch
+if test $fry_auto_switch = 1
   function __fry_auto_switch --on-variable PWD --description 'Auto-switch ruby version from .ruby-version file'
     status --is-command-substitution; and return
 
