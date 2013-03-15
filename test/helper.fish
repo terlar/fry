@@ -26,10 +26,8 @@ function stub
   eval "function $cmd; echo $out; end"
 end
 
-set -l test_path (pwd)
-
 set -e fry_auto_switch
-set -xg fry_path $test_path/../share/fry
-set -xg fry_rubies $test_path/dummy-rubies
+set -xg fry_path $PWD/../share/fry
+set -xg fry_rubies $PWD/dummy-rubies
 
 . $fry_path/fry.fish
