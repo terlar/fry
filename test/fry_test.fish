@@ -15,9 +15,9 @@ it 'returns status from command'; begin
 end
 
 it 'outputs rubies without args'; begin
-  stub fry-rubies '::rubies::'
+  stub fry-rubies ::rubies::
 
-  if test (fry) = '::rubies::'
+  if test (fry) = ::rubies::
     pass
   else
     fail
@@ -25,9 +25,9 @@ it 'outputs rubies without args'; begin
 end
 
 it 'outputs help with unknown command'; begin
-  stub fry-help '::help::'
+  stub fry-help ::help::
 
-  if test (fry unknown) = '::help::'
+  if test (fry unknown) = ::help::
     pass
   else
     fail
@@ -37,7 +37,7 @@ end
 it 'outputs command with known command'; begin
   stub fry-version ::version::
 
-  if test (fry version) = '::version::'
+  if test (fry version) = ::version::
     pass
   else
     fail
@@ -47,7 +47,7 @@ end
 it 'switches ruby with known ruby'; begin
   stub fry-use ::use::
 
-  if test (fry dummy-1) = '::use::'
+  if test (fry dummy-1) = ::use::
     pass
   else
     fail

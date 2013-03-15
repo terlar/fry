@@ -5,7 +5,7 @@ function subject
 end
 
 it 'contains system'; begin
-  if contains 'system' (subject)
+  if contains system (subject)
     pass
   else
     fail
@@ -13,7 +13,7 @@ it 'contains system'; begin
 end
 
 it 'contains rubies'; begin
-  if contains 'dummy-1' (subject)
+  if contains dummy-1 (subject)
     pass
   else
     fail

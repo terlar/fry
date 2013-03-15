@@ -5,7 +5,7 @@ context 'without <ruby>'; begin
     fry-use
   end
 
-  stub fry-rubies '::rubies::'
+  stub fry-rubies ::rubies::
 
   it 'returns status 1'; begin
     subject >/dev/null
@@ -17,7 +17,7 @@ context 'without <ruby>'; begin
   end
 
   it 'outputs rubies'; begin
-    if contains '::rubies::' (subject)
+    if contains ::rubies:: (subject)
       pass
     else
       fail
@@ -30,7 +30,7 @@ context 'with unknown <ruby>'; begin
     fry-use unknown
   end
 
-  stub fry-rubies '::rubies::'
+  stub fry-rubies ::rubies::
 
   it 'returns status 1'; begin
     subject >/dev/null
@@ -43,7 +43,7 @@ context 'with unknown <ruby>'; begin
   end
 
   it 'outputs rubies'; begin
-    if contains '::rubies::' (subject)
+    if contains ::rubies:: (subject)
       pass
     else
       fail
@@ -54,7 +54,7 @@ end
 context 'with known <ruby>'; begin
   function subject
     set PATH $fry_rubies/dummy-2/bin $PATH
-    fry-use 'dummy-1'
+    fry-use dummy-1
   end
 
   it 'returns status 0'; begin
@@ -99,7 +99,7 @@ end
 context 'with known and current <ruby>'; begin
   function subject
     set PATH $fry_rubies/dummy-1/bin $PATH
-    fry-use 'dummy-1'
+    fry-use dummy-1
   end
 
   it 'returns status 0'; begin
@@ -124,7 +124,7 @@ end
 context 'with system <ruby>'; begin
   function subject
     set PATH $fry_rubies/dummy-1/bin $PATH
-    fry-use 'system'
+    fry-use system
   end
 
   it 'returns status 0'; begin
@@ -148,7 +148,7 @@ context 'with system <ruby>'; begin
   end
 
   it 'outputs switch text'; begin
-    if contains "Switched to system ruby" (subject)
+    if contains 'Switched to system ruby' (subject)
       pass
     else
       fail
@@ -158,7 +158,7 @@ end
 
 context 'with system and current <ruby>'; begin
   function subject
-    fry-use 'system'
+    fry-use system
   end
 
   it 'returns status 0'; begin

@@ -5,7 +5,7 @@ function subject
 end
 
 it 'outputs system ruby when not found'; begin
-  if test (subject) = 'system'
+  if test (subject) = system
     pass
   else
     fail
@@ -15,7 +15,7 @@ end
 it 'outputs current ruby when found'; begin
   set PATH $fry_rubies/dummy-1/bin $PATH
 
-  if test (subject) = 'dummy-1'
+  if test (subject) = dummy-1
     pass
   else
     fail
