@@ -1,5 +1,15 @@
 # Path
-set -gx fry_rubies $HOME/.rubies
+if not set -q fry_rubies
+  set -gx fry_rubies $HOME/.rubies
+end
+
+if not contains $fry_path/functions $fish_function_path
+  set fish_function_path $fry_path/functions $fish_function_path
+end
+
+if not contains $fry_path/completions $fish_complete_path
+  set fish_complete_path $fry_path/completions $fish_complete_path
+end
 
 # Auto-switch
 if set -q fry_auto_switch

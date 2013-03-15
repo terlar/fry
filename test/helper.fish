@@ -28,7 +28,8 @@ end
 
 set -l test_path (pwd)
 
-set -xg fish_function_path $test_path/../share/fry/functions $fish_function_path
-
 set -e fry_auto_switch
+set -xg fry_path $test_path/../share/fry
 set -xg fry_rubies $test_path/dummy-rubies
+
+. $fry_path/fry.fish
