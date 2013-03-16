@@ -30,7 +30,7 @@ complete -f -c fry -n '__fish_fry_needs_command' -a '(__fish_fry)'
 complete -f -c fry -n '__fish_fry_needs_command' -a '(__fish_fry_rubies)' -d 'Ruby'
 complete -f -c fry -n '__fish_fry_using_command use' -a '(__fish_fry_rubies)' -d 'Ruby'
 
-if which ruby-build >/dev/null
+if test (which ruby-build)
   complete -f -c fry -n '__fish_fry_needs_command' -a 'install' -d 'Download, compile and install'
   complete -f -c fry -n '__fish_fry_using_command install' -a '(ruby-build --definitions)' -d 'Ruby'
 end

@@ -1,9 +1,8 @@
 function fry-install --description 'Download, compile and install (requires ruby-build)'
-  if not which ruby-build >/dev/null
+  if not test (which ruby-build)
     echo 'fry-install: You must install ruby-build to use this feature'
     return 1
   end
-
 
   if test (count $argv) -eq 0
     echo 'fry-install: No <ruby> given'

@@ -4,14 +4,13 @@ function fry --description 'Fishy ruby switcher'
   end
 
   set -l command $argv[1]
-  set -l func_name "fry-$command"
-
   set -e argv[1]
+  set -l func_name "fry-$command"
 
   if functions -q $func_name
     eval $func_name $argv
   else
-    if __fry_find_ruby $command >/dev/null
+    if test (__fry_find_ruby $command)
       fry-use $command
     else
       fry-help
