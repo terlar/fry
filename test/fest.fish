@@ -55,5 +55,5 @@ for name in '' status equals greater contains
     continue
   end
 
-  eval 'function '$refute_function'; '$assert_function' $argv; and return 1; return 0; end'
+  eval 'function '$refute_function'; not '$assert_function' $argv; end'
 end
