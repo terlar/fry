@@ -1,11 +1,8 @@
 # Path
-if not set -q fry_rubies
-  set -gx fry_rubies $HOME/.rubies
-end
+set -l fry_path (dirname (status -f))
 
-if not set -q fry_auto_switch
-  set -U fry_auto_switch 0
-end
+set -q fry_rubies; or set -gx fry_rubies $HOME/.rubies
+set -q fry_auto_switch; or set -U fry_auto_switch 0
 
 if not contains $fry_path/functions $fish_function_path
   set fish_function_path $fry_path/functions $fish_function_path
