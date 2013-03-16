@@ -14,6 +14,16 @@ it 'returns status from command'; begin
   end
 end
 
+it 'handles dashes'; begin
+  stub fry-help ::help::
+
+  if test (fry --) = ::help::
+    pass
+  else
+    fail
+  end
+end
+
 it 'outputs rubies without args'; begin
   stub fry-rubies ::rubies::
 

@@ -1,10 +1,17 @@
 function __fry_find_ruby --description 'Find ruby by name'
+  set -l ruby
   set -l name $argv[1]
-  set -l ruby (fry-ls | grep -m 1 $name)
+
+  if contains $name (fry-ls)
+    set ruby $name
+  end
 
   if test -z "$ruby"
     set -l rubyless (echo $name | sed 's/^ruby-//')
-    set ruby (fry-ls | grep -m 1 $rubyless)
+
+    if contains $rubyless (fry-ls)
+      set ruby $rubyless
+    end
   end
 
   if test -z "$ruby"
