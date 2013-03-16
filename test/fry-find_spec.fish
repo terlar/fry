@@ -16,4 +16,4 @@ function spec_find_rubyless -d 'matches rubyless'
   test (fry-find ruby-1.9) = '1.9.3'
 end
 
-. tank/tank.fish (status -f)
+. $fish_tank

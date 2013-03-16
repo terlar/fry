@@ -33,4 +33,4 @@ function spec_rubies_3 -d 'highlights current'
   contains (expected) (fry-rubies)
 end
 
-. tank/tank.fish (status -f)
+. $fish_tank

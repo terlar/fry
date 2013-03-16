@@ -8,4 +8,4 @@ function spec_ls_2 -d 'contains rubies'
   contains dummy-1 (fry-ls)
 end
 
-. tank/tank.fish (status -f)
+. $fish_tank

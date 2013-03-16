@@ -1,5 +1,3 @@
-#!/usr/local/bin/fish
-
 echo
 
 set -l error 0

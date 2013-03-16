@@ -13,4 +13,4 @@ function spec_current_2 -d 'outputs system ruby when not found'
   test (fry-current) = system
 end
 
-. tank/tank.fish (status -f)
+. $fish_tank

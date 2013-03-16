@@ -33,4 +33,4 @@ function spec_known_ruby -d 'switches ruby with known ruby'
   test (fry dummy-1) = __use__
 end
 
-. tank/tank.fish (status -f)
+. $fish_tank

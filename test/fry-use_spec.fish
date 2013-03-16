@@ -82,4 +82,4 @@ function spec_use_with_system_as_current_2 -d 'outputs nothing with system as cu
   test -z (fry-use system)
 end
 
-. tank/tank.fish (status -f)
+. $fish_tank
