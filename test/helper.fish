@@ -19,11 +19,11 @@ function fail
 end
 
 function stub
-  set -l out $argv
   set -l cmd $argv[1]
-  set -e out[1]
+  set -e argv[1]
+  set -l out $argv
 
-  eval "function $cmd; echo $out; end"
+  eval "function $cmd; for i in $out; echo \$i; end; end"
 end
 
 set -xg fry_rubies $PWD/dummy-rubies
