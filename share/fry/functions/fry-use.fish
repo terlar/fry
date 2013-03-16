@@ -11,7 +11,7 @@ function fry-use --description 'Use the ruby given by <ruby>'
   set -l ruby $name
 
   if test $name != 'system'
-    set ruby (__fry_find_ruby $name)
+    set ruby (fry-find $name)
   end
 
   if test -z "$ruby"

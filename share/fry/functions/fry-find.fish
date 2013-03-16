@@ -1,4 +1,4 @@
-function __fry_find_ruby --description 'Find ruby by name'
+function fry-find --description 'Find ruby by name'
   set -l name $argv[1]
   set -l rubyless_name (echo $name | sed 's/^ruby-//')
 

@@ -10,7 +10,7 @@ function fry --description 'Fishy ruby switcher'
   if functions -q $func_name
     eval $func_name $argv
   else
-    if test (__fry_find_ruby $command)
+    if test (fry-find $command)
       fry-use $command
     else
       fry-help
