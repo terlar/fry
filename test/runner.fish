@@ -1,10 +1,12 @@
 #!/usr/local/bin/fish
 
-echo Running tests under fish
 echo
 
-for test in *_test.fish
-  echo Running $test
-  fish $test
+set -l error 0
+for spec in *_spec.fish
+  echo Running $spec
+  fish $spec; or set error 1
   echo
 end
+
+exit $error
