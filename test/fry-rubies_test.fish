@@ -1,50 +1,36 @@
 . helper.fish
 
-function subject
-  fry-rubies | cat
-end
+it 'contains system' (begin
+  stub fry-current dummy
 
-it 'contains system'; begin
-  function result
-    echo -n '* '
-    set_color green
-    echo -n system
+  function expected
+    echo -n '  system'
     set_color normal
   end
 
-  if contains (result) (subject)
-    pass
-  else
-    fail
-  end
-end
+  assert_contains (expected) (fry-rubies)
+end)
 
-it 'contains rubies'; begin
-  function result
+it 'contains rubies' (begin
+  stub fry-current dummy
+
+  function expected
     echo -n '  dummy-1'
     set_color normal
   end
 
-  if contains (result) (subject)
-    pass
-  else
-    fail
-  end
-end
+  assert_contains (expected) (fry-rubies)
+end)
 
-it 'highlights current'; begin
-  function result
+it 'highlights current' (begin
+  stub fry-current dummy-1
+
+  function expected
     echo -n '* '
     set_color green
     echo -n dummy-1
     set_color normal
   end
 
-  stub fry-current dummy-1
-
-  if contains (result) (subject)
-    pass
-  else
-    fail
-  end
-end
+  assert_contains (expected) (fry-rubies)
+end)

@@ -1,65 +1,31 @@
 . helper.fish
 
-it 'returns status from command'; begin
-  function fry-dummy
-    return 1
-  end
+it 'returns status from command' (begin
+  function fry-dummy; return 1; end
+  refute_status (fry dummy)
+end)
 
-  fry dummy >/dev/null
-
-  if test $status -eq 1
-    pass
-  else
-    fail
-  end
-end
-
-it 'handles dashes'; begin
+it 'handles dashes' (begin
   stub fry-help ::help::
+  assert_equals (fry --) ::help::
+end)
 
-  if test (fry --) = ::help::
-    pass
-  else
-    fail
-  end
-end
-
-it 'outputs rubies without args'; begin
+it 'outputs rubies without args' (begin
   stub fry-rubies ::rubies::
+  assert_equals (fry) ::rubies::
+end)
 
-  if test (fry) = ::rubies::
-    pass
-  else
-    fail
-  end
-end
-
-it 'outputs help with unknown command'; begin
+it 'outputs help with unknown command' (begin
   stub fry-help ::help::
+  assert_equals (fry unknown) ::help::
+end)
 
-  if test (fry unknown) = ::help::
-    pass
-  else
-    fail
-  end
-end
-
-it 'outputs command with known command'; begin
+it 'outputs command with known command' (begin
   stub fry-version ::version::
+  assert_equals (fry version) ::version::
+end)
 
-  if test (fry version) = ::version::
-    pass
-  else
-    fail
-  end
-end
-
-it 'switches ruby with known ruby'; begin
+it 'switches ruby with known ruby' (begin
   stub fry-use ::use::
-
-  if test (fry dummy-1) = ::use::
-    pass
-  else
-    fail
-  end
-end
+  assert_equals (fry dummy-1) ::use::
+end)
