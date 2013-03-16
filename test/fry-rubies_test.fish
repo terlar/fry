@@ -1,14 +1,15 @@
 . helper.fish
 
 function subject
-  fry-rubies
+  fry-rubies | cat
 end
 
 it 'contains system'; begin
   function result
-    echo -n '*'
+    echo -n '* '
     set_color green
-    echo -n ' system'
+    echo -n system
+    set_color normal
   end
 
   if contains (result) (subject)
@@ -20,8 +21,8 @@ end
 
 it 'contains rubies'; begin
   function result
-    set_color normal
     echo -n '  dummy-1'
+    set_color normal
   end
 
   if contains (result) (subject)
@@ -33,10 +34,10 @@ end
 
 it 'highlights current'; begin
   function result
-    set_color normal
-    echo -n '*'
+    echo -n '* '
     set_color green
-    echo -n ' dummy-1'
+    echo -n dummy-1
+    set_color normal
   end
 
   stub fry-current dummy-1
