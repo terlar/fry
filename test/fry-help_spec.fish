@@ -1,6 +1,6 @@
 . helper.fish
 
-function spec_help_1 -d 'outputs help'
+function it_outputs_help -d 'outputs help'
   test (count (fry-help)) -gt 0
 end
 

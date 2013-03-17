@@ -1,10 +1,10 @@
 . helper.fish
 
-function spec_ls_1 -d 'contains system'
+function it_contains_system -d 'contains system'
   contains system (fry-ls)
 end
 
-function spec_ls_2 -d 'contains rubies'
+function it_contains_rubies -d 'contains rubies'
   contains dummy-1 (fry-ls)
 end
 
