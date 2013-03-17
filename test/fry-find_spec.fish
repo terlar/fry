@@ -8,11 +8,11 @@ function setup_tank
   end
 end
 
-function it_matches_fuzzily -d 'matches fuzzily'
+function it_matches_fuzzily
   test (fry-find ruby-2.0) = 'ruby-2.0.0'
 end
 
-function it_matches_rubyless -d 'matches rubyless'
+function it_matches_rubyless
   test (fry-find ruby-1.9) = '1.9.3'
 end
 
