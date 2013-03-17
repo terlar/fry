@@ -57,7 +57,7 @@ If you wish to set a default Ruby, simply call `fry` in `~/.config/fish/config.f
 fry ruby-1.9
 ```
 
-If you have enabled auto-switching, simply create a .ruby-version file in your home directory:
+If you have enabled auto-switching, simply create a `.ruby-version` file in your home directory:
 ```sh
 echo 'ruby-1.9' > ~/.ruby-version
 ```
