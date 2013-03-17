@@ -1,6 +1,6 @@
-function fry-install --description 'Download, compile and install (requires ruby-build)'
+function fry-install --description 'Install rubies (requires ruby-build)'
   if not test (which ruby-build)
-    echo 'fry-install: You must install ruby-build to use this feature'
+    echo 'fry-install: This feature requires ruby-build'
     return 1
   end
 

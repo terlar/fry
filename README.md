@@ -66,9 +66,9 @@ echo 'ruby-1.9' > ~/.ruby-version
 
 List available rubies:
 ```sh
-fry                       
-  system                    
-* 1.9.3-p392                
-  2.0.0-p0                  
+fry
+  system
+* 1.9.3-p392
+  2.0.0-p0
   jruby-1.7.3
 ```

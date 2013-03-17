@@ -1,4 +1,4 @@
-function fry-rubies --description 'List the installed rubies with the current one highlighted'
+function fry-rubies --description 'List available rubies with the current one highlighted'
   for ruby in (fry-ls)
     if test $ruby = (fry-current)
       echo -n '* '
