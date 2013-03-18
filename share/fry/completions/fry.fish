@@ -22,8 +22,7 @@ function __fish_fry_rubies
 end
 
 function __fish_fry
-  fry help | grep '  ' \
-    | sed 's/^[ ]*//; s/<.*> //; s/[[:blank:]]/'(printf '\t')'/'
+  fry help | grep '  ' | sed 's|^ *||;s|<.*> ||' | unexpand -t1
 end
 
 complete -f -c fry -n '__fish_fry_needs_command' -a '(__fish_fry)'
