@@ -17,17 +17,13 @@ function __fish_fry_using_command
   return 1
 end
 
-function __fish_fry_rubies
-  fry ls
-end
-
 function __fish_fry
   fry help | grep '  ' | sed 's|^ *||;s|<.*> ||' | unexpand -t1
 end
 
 complete -f -c fry -n '__fish_fry_needs_command' -a '(__fish_fry)'
-complete -f -c fry -n '__fish_fry_needs_command' -a '(__fish_fry_rubies)' -d 'Ruby'
-complete -f -c fry -n '__fish_fry_using_command use' -a '(__fish_fry_rubies)' -d 'Ruby'
+complete -f -c fry -n '__fish_fry_needs_command' -a '(fry ls)' -d 'Ruby'
+complete -f -c fry -n '__fish_fry_using_command use' -a '(fry ls)' -d 'Ruby'
 
 if test (which ruby-build)
   complete -f -c fry -n '__fish_fry_using_command install' -a '(ruby-build --definitions)' -d 'Ruby'
