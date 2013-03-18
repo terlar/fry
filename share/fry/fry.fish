@@ -1,6 +1,6 @@
 # Set defaults
 set -q fry_rubies       ; or set -gx fry_rubies $HOME/.rubies
-set -q fry_auto_switch  ; or set -U fry_auto_switch 0
+set -q fry_auto_switch  ; or set -gx fry_auto_switch 0
 
 # Path
 set -l fry_path (dirname (status -f))
