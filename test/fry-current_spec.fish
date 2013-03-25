@@ -1,4 +1,4 @@
-. helper.fish
+. (dirname (status -f))/helper.fish
 
 function clean_tank
   set PATH $test_path

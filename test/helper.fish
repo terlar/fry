@@ -5,14 +5,13 @@ if not test -e $fish_tank
   exit 1
 end
 
-set -xg tank_reporter spec
+set -l spec_path (dirname (status -f))
 
 set -xg test_path $PATH
-
-set -xg fry_rubies $PWD/dummy-rubies
+set -xg fry_rubies $spec_path/dummy-rubies
 set -xg fry_auto_switch 0
 
-. ../share/fry/fry.fish
+. $spec_path/../share/fry/fry.fish
 
-function setup_tank; return; end
-function clean_tank; return; end
+function setup_tank; end
+function clean_tank; end

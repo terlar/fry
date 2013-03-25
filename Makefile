@@ -40,7 +40,7 @@ clean:
 all: $(PKG) $(SIG)
 
 test:
-	cd test; fish <runner.fish;
+	fish test/runner.fish
 
 tag:
 	git push

@@ -1,4 +1,4 @@
-. helper.fish
+. (dirname (status -f))/helper.fish
 
 function setup_tank
   function ruby-build

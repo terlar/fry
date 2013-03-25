@@ -1,4 +1,4 @@
-. helper.fish
+. (dirname (status -f))/helper.fish
 
 function it_contains_system
   contains system (fry-ls)

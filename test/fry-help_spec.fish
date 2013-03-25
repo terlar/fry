@@ -1,4 +1,4 @@
-. helper.fish
+. (dirname (status -f))/helper.fish
 
 function it_outputs_help
   test (count (fry-help)) -gt 0
