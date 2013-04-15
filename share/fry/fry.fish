@@ -15,13 +15,17 @@ end
 
 # Auto-switch
 if test $fry_auto_switch = 1
-  function __fry_auto_switch --on-event fish_prompt --description 'Auto-switch ruby version from .ruby-version file'
+  function __fry_auto_switch --on-variable PWD --description 'Auto-switch ruby version from .ruby-version file'
+    status --is-command-substitution; and return
+
     set -l version_file (__fry_find_version_file)
     test -n "$version_file"; or return
 
     set -l version_data (cat $version_file)
     test -n "$version_data"; or return
 
-    fry use $version_data
+    fry use $version_data >/dev/null
   end
+
+  __fry_auto_switch
 end
