@@ -20,9 +20,9 @@ end
 
 function it_outputs_system_path_when_not_set_with_option_path
   stub which
-  function which-ruby; echo __ruby_path__; end
+  function which-ruby; echo the/system/bin/path; end
 
-  test (fry-current --path) = __ruby_path__
+  test (fry-current --path) = the/system/bin
 end
 
 . $fish_tank

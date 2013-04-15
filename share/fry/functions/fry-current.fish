@@ -20,7 +20,7 @@ function fry-current --description 'Show the current ruby'
   end
 
   if set -ql option_path[1]
-    which ruby
+    dirname (which ruby)
   else
     echo 'system'
   end
