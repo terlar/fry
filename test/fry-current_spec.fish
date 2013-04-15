@@ -9,8 +9,20 @@ function it_outputs_current_when_set
   test (fry-current) = dummy-1
 end
 
+function it_outputs_current_path_when_set_with_option_path
+  set PATH $fry_rubies/dummy-1/bin $PATH
+  test (fry-current --path) = $fry_rubies/dummy-1/bin
+end
+
 function it_outputs_system_when_not_set
   test (fry-current) = system
+end
+
+function it_outputs_system_path_when_not_set_with_option_path
+  stub which
+  function which-ruby; echo __ruby_path__; end
+
+  test (fry-current --path) = __ruby_path__
 end
 
 . $fish_tank
