@@ -50,6 +50,14 @@ set -U fry_auto_switch 1
 
 This is off by default, so you can either do `set -e fry_auto_switch` or `set -U fry_auto_switch 0` to turn this off again.
 
+#### Pow
+
+When you have a .ruby-version file in your home directory this will be used by pow as default.
+If you want it to pickup the custom ruby-version per project you have to create a `.powenv` inside the project folder with the following content:
+```sh
+export PATH="$(fish -c 'fry current --path'):$PATH"
+```
+
 ### Default Ruby
 
 If you wish to set a default Ruby, simply call `fry` in `~/.config/fish/config.fish`:
