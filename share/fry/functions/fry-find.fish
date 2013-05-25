@@ -4,7 +4,7 @@ function fry-find --description 'Find ruby by name'
 
   for i in (fry-ls)
     switch $i
-      case "$name*" "$rubyless_name*"
+      case "$name*" "$rubyless_name*" "ruby-$name*"
         echo $i
         return
     end
