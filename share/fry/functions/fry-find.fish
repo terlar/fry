@@ -2,7 +2,7 @@ function fry-find --description 'Find ruby by name'
   set -l name $argv[1]
   set -l rubyless_name (echo $name | sed 's/^ruby-//')
 
-  for i in (fry-ls | sed '1!G;h;$!d')
+  for i in (fry-ls | sort -r -n)
     switch $i
       case "$name*" "$rubyless_name*" "ruby-$name*"
         echo $i
