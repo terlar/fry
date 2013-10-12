@@ -1,18 +1,13 @@
 source (dirname (status -f))/helper.fish
 
-function test_fry-current -e tank_test
+function suite_fry-current
   function setup
-    set -g old_path $PATH
-    set -g old_fry_rubies $fry_rubies
-
-    mkdir -p /tmp/rubies/dummy-1.5/bin
-    set -g fry_rubies /tmp/rubies
+    stub_var fry_rubies /tmp/rubies
+    mkdir -p $fry_rubies/ruby-2.0/bin
   end
 
   function teardown
     rm -r /tmp/rubies
-    set PATH $old_path
-    set fry_rubies $old_fry_rubies
   end
 
   function test_exit_status
@@ -20,9 +15,8 @@ function test_fry-current -e tank_test
   end
 
   function test_output_when_ruby_is_in_path
-    set PATH /tmp/rubies/dummy-1.5/bin $PATH
-
-    assert_equal 'dummy-1.5' (fry-current)
+    stub_var PATH $fry_rubies/ruby-2.0/bin $PATH
+    assert_equal 'ruby-2.0' (fry-current)
   end
 
   function test_output_when_ruby_is_not_in_path
@@ -30,21 +24,21 @@ function test_fry-current -e tank_test
   end
 
   function test_path_output_when_ruby_is_in_path
-    set PATH /tmp/rubies/dummy-1.5/bin $PATH
-
-    assert_equal '/tmp/rubies/dummy-1.5/bin' (fry-current --path)
+    stub_var PATH $fry_rubies/ruby-2.0/bin $PATH
+    assert_equal '/tmp/rubies/ruby-2.0/bin' (fry-current --path)
   end
 
   function test_path_output_when_ruby_is_not_in_path
-    function which
+    function which_stub
       switch $argv
-        case 'ruby'; echo 'system/bin/ruby'
+        case 'ruby'; echo '/dev/null/system/bin/ruby'
       end
     end
+    stub which which_stub
 
-    assert_equal 'system/bin' (fry-current --path)
+    assert_equal '/dev/null/system/bin' (fry-current --path)
   end
 
 end
 
-tank_autorun
+tank_run

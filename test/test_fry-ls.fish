@@ -1,10 +1,13 @@
 source (dirname (status -f))/helper.fish
 
-function test_fry-ls -e tank_test
+function suite_fry-ls
   function setup
-    function ls
-      echo 'dummy-1.0'
-    end
+    stub_var fry_rubies /tmp/rubies
+    mkdir -p $fry_rubies/ruby-2.0/bin
+  end
+
+  function teardown
+    rm -r /tmp/rubies
   end
 
   function test_exit_status
@@ -13,8 +16,8 @@ function test_fry-ls -e tank_test
 
   function test_output
     assert_includes system (fry-ls)
-    assert_includes dummy-1.0 (fry-ls)
+    assert_includes ruby-2.0 (fry-ls)
   end
 end
 
-tank_autorun
+tank_run

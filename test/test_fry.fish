@@ -1,42 +1,58 @@
 source (dirname (status -f))/helper.fish
 
-function test_fry -e tank_test
-  function test_output_without_args
-    function fry-rubies; echo fry-rubies; end
+function suite_fry
+  function setup
+    function fry-truthy; true ; end
+    function fry-falsy ; false; end
 
-    assert_equal fry-rubies (fry)
+    stub_var fry_rubies /tmp/rubies
+    mkdir -p $fry_rubies/ruby-1.9/bin
+    stub_var PATH $PATH
+  end
+
+  function teardown
+    functions -e fry-truthy
+    functions -e fry-falsy
+    rm -r /tmp/rubies
+  end
+
+  function test_output_without_args
+    set -l normal (set_color normal)
+    set -l green  (set_color green)
+    set -l output (fry)
+
+    assert_includes '  ruby-1.9'$normal $output
+    assert_includes '* '$green'system'$normal $output
   end
 
   function test_command_delegation
-    function fry-version; echo fry-version; end
-    function fry-truthy ; true; end
-    function fry-falsy  ; false; end
-
     assert (fry truthy)
     refute (fry falsy)
-    assert_equal fry-version (fry version)
+    assert_equal (fry-version) (fry version)
   end
 
   function test_unknown_command
-    function fry-help ; echo fry-help; end
-
+    set -l help_output (fry-help)
     set -l output (fry unknown)
+
     assert_equal 0 $status
-    assert_includes fry-help $output
+    assert_includes $help_output $output
   end
 
   function test_ruby_switch
-    function fry-use; echo fry-use $argv; end
-    function fry-ls ; echo ruby-1; end
+    set -l output (fry ruby-1.9)
 
-    assert_equal 'fry-use ruby-1' (fry ruby-1)
+    assert_equal 0 $status
+    assert_includes "Switched to ruby 'ruby-1.9'" $output
+    assert_equal $fry_rubies/ruby-1.9/bin $PATH[1]
   end
 
   function test_option_parsing
-    function fry-help; echo fry-help; end
+    set -l help_output (fry-help)
+    set -l output (fry --)
 
-    assert_equal fry-help (fry --)
+    assert_includes $help_output $output
   end
 end
 
-tank_autorun
+tank_run

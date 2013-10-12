@@ -1,30 +1,29 @@
 source (dirname (status -f))/helper.fish
 
-function test_fry-install -e tank_test
+function suite_fry-install
   function setup
-    function which
-      echo 'ruby-build'
+    function which_stub
+      switch $argv
+        case 'ruby-build'; echo '/dev/null/ruby-build'
+      end
     end
+    stub which which_stub
 
-    function ruby-build
+    function ruby-build_stub
       switch $argv[1]
-        case '--definitions'; echo 'known-ruby'
+        case '--definitions'; echo 'ruby-2.0'
         case '*'            ; echo "ruby-build $argv"
       end
     end
+    stub ruby-build ruby-build_stub
 
-    set -g old_fry_rubies $fry_rubies
-    set -g fry_rubies /tmp/rubies
-  end
-
-  function teardown
-    functions -e which
-    functions -e ruby-build
-    set fry_rubies $old_fry_rubies
+    stub_var fry_rubies /tmp/rubies
   end
 
   function test_missing_build_command
-    function which; end
+    function which_stub; end
+    stub which which_stub
+
     refute (fry-install)
     assert_equal 'fry-install: This feature requires ruby-build' (fry-install)
   end
@@ -33,20 +32,20 @@ function test_fry-install -e tank_test
     refute (fry-install)
     assert_includes 'fry-install: No <ruby> given' (fry-install)
     assert_includes 'Available rubies:' (fry-install)
-    assert_includes 'known-ruby' (fry-install)
+    assert_includes 'ruby-2.0' (fry-install)
   end
 
   function test_unknown_ruby
     refute (fry-install unknown)
     assert_includes "fry-install: Unknown ruby 'unknown'" (fry-install unknown)
     assert_includes 'Available rubies:' (fry-install)
-    assert_includes 'known-ruby' (fry-install unknown)
+    assert_includes 'ruby-2.0' (fry-install unknown)
   end
 
   function test_known_ruby
-    assert (fry-install known-ruby)
-    assert_equal 'ruby-build known-ruby /tmp/rubies/known-ruby' (fry-install known-ruby)
+    assert (fry-install ruby-2.0)
+    assert_equal 'ruby-build ruby-2.0 /tmp/rubies/ruby-2.0' (fry-install ruby-2.0)
   end
 end
 
-tank_autorun
+tank_run

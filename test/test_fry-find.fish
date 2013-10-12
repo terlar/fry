@@ -1,14 +1,17 @@
 source (dirname (status -f))/helper.fish
 
-function test_fry-find -e tank_test
+function suite_fry-find
   function setup
-    function fry-ls
-      echo 1.8.7-p371
-      echo 1.8.7-p374
-      echo 1.9.3-p392
-      echo jruby-1.7.3
-      echo ruby-2.0.0-p0
-    end
+    stub_var fry_rubies /tmp/rubies
+    mkdir -p $fry_rubies/1.8.7-p371
+    mkdir -p $fry_rubies/1.8.7-p374
+    mkdir -p $fry_rubies/1.9.3-p392
+    mkdir -p $fry_rubies/jruby-1.7.3
+    mkdir -p $fry_rubies/ruby-2.0.0-p0
+  end
+
+  function teardown
+    rm -r /tmp/rubies
   end
 
   function test_exit_status
@@ -27,4 +30,4 @@ function test_fry-find -e tank_test
   end
 end
 
-tank_autorun
+tank_run

@@ -1,6 +1,6 @@
 source (dirname (status -f))/helper.fish
 
-function test_fry-version -e tank_test
+function suite_fry-version
   function test_exit_status
     assert (fry-version)
   end
@@ -10,4 +10,4 @@ function test_fry-version -e tank_test
   end
 end
 
-tank_autorun
+tank_run
