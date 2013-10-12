@@ -1,5 +1,3 @@
-source (dirname (status -f))/helper.fish
-
 function suite_fry-install
   function setup
     function which_stub
@@ -48,4 +46,7 @@ function suite_fry-install
   end
 end
 
-tank_run
+if not set -q tank_running
+  source (dirname (status -f))/helper.fish
+  tank_run
+end

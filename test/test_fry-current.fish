@@ -1,5 +1,3 @@
-source (dirname (status -f))/helper.fish
-
 function suite_fry-current
   function setup
     stub_var fry_rubies /tmp/rubies
@@ -41,4 +39,7 @@ function suite_fry-current
 
 end
 
-tank_run
+if not set -q tank_running
+  source (dirname (status -f))/helper.fish
+  tank_run
+end
