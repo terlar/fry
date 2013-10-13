@@ -3,6 +3,11 @@ function fry --description 'Fishy ruby switcher'
     set argv rubies
   end
 
+  switch $argv[1]
+    case 'help' '-h' '--help'
+      fry-help; return
+  end
+
   set -l command $argv[1]
   set -e argv[1]
   set -l func_name "fry-$command"

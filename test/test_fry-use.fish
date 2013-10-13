@@ -10,24 +10,22 @@ function suite_fry-use
     rm -r /tmp/rubies
   end
 
-  function test_argument_validation
+  function test_empty_arguments
     set -l output (fry-use)
 
-    refute_equal 0 $status
-    assert_includes 'fry-use: No <ruby> given' $output
+    assert_equal 0 $status
+    assert_includes 'usage: fry use <ruby>' $output
     assert_includes 'Available rubies:' $output
-    assert_includes 'ruby-1.9' $output
-    assert_includes 'ruby-2.0' $output
+    assert_includes (fry-ls) $output
   end
 
   function test_unknown_ruby
     set -l output (fry-use unknown)
 
     refute_equal 0 $status
-    assert_includes "fry-use: Unknown ruby 'unknown'" $output
+    assert_includes "error: unknown ruby `unknown'" $output
     assert_includes 'Available rubies:' $output
-    assert_includes 'ruby-1.9' $output
-    assert_includes 'ruby-2.0' $output
+    assert_includes (fry-ls) $output
   end
 
   function test_ruby_switch
