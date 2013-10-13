@@ -4,6 +4,15 @@ function fry-current --description 'Show the current ruby'
   for arg in $argv
     switch $arg
       case '--path'; set option_path 1
+      case '-h' '--help'
+        echo 'usage: fry current [options]'
+        echo
+        echo '    --path        show path of current ruby'
+        return
+      case '-*' '--*'
+        echo "error: unknown option `$arg'"
+        fry-current --help
+        return 1
     end
   end
 
