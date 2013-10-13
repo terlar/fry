@@ -9,5 +9,5 @@ function fry-help --description 'Display help information'
   echo '  use <ruby>      Use the ruby given by <ruby>'
   echo '  install <ruby>  Install rubies (requires ruby-build)'
   echo '  version         Display the current version of fry'
-  echo '  help            Display help information'
+  echo '  help            Display this help information'
 end
