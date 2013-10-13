@@ -8,5 +8,6 @@ install:
   - git clone git://github.com/terlar/fish-tank.git
   - cd fish-tank
   - sudo make install
+  - cd -
 
 script: make test
