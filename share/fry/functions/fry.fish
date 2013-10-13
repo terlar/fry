@@ -3,7 +3,7 @@ function fry --description 'Fishy ruby switcher'
     set argv rubies
   end
 
-  switch $argv
+  switch $argv[1]
     case 'help' '-h' '--help'
       fry-help; return
   end

@@ -2,6 +2,7 @@ function suite_fry
   function setup
     function fry-truthy; true ; end
     function fry-falsy ; false; end
+    function fry-args  ; echo $argv; end
 
     stub_var fry_rubies /tmp/rubies
     mkdir -p $fry_rubies/ruby-1.9/bin
@@ -11,6 +12,7 @@ function suite_fry
   function teardown
     functions -e fry-truthy
     functions -e fry-falsy
+    functions -e fry-args
     rm -r /tmp/rubies
   end
 
@@ -23,6 +25,7 @@ function suite_fry
     assert (fry truthy)
     refute (fry falsy)
     assert_equal (fry-version) (fry version)
+    assert_equal (fry-args command --option) (fry args command --option)
   end
 
   function test_help_arguments
