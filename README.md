@@ -1,4 +1,4 @@
-# fry
+# fry [![Build Status](https://travis-ci.org/terlar/fry.png?branch=master)](https://travis-ci.org/terlar/fry)
 
 A simple ruby version manager for [fish](https://github.com/fish-shell/fish-shell).
 
