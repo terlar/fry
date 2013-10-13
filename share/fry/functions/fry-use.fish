@@ -3,7 +3,7 @@ function fry-use --description 'Use the ruby given by <ruby>'
     echo 'fry-use: No <ruby> given'
     echo
     echo 'Available rubies:'
-    fry-rubies
+    fry-ls
     return 1
   end
 
@@ -18,7 +18,7 @@ function fry-use --description 'Use the ruby given by <ruby>'
     echo "fry-use: Unknown ruby '$name'"
     echo
     echo 'Available rubies:'
-    fry-rubies
+    fry-ls
     return 1
   end
 
