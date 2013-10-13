@@ -14,13 +14,9 @@ function suite_fry
     rm -r /tmp/rubies
   end
 
-  function test_output_without_args
-    set -l normal (set_color normal)
-    set -l green  (set_color green)
-    set -l output (fry)
-
-    assert_includes '  ruby-1.9'$normal $output
-    assert_includes '* '$green'system'$normal $output
+  function test_no_arguments
+    assert (fry)
+    assert_includes (fry-rubies) (fry)
   end
 
   function test_command_delegation
@@ -29,12 +25,24 @@ function suite_fry
     assert_equal (fry-version) (fry version)
   end
 
-  function test_unknown_command
+  function test_help_arguments
     set -l help_output (fry-help)
-    set -l output (fry unknown)
 
-    assert_equal 0 $status
-    assert_includes $help_output $output
+    for arg in help --help -h
+      set -l output (fry $arg)
+      assert_equal 0 $status
+      assert_includes $help_output $output
+    end
+  end
+
+  function test_invalid_arguments
+    set -l help_output (fry-help)
+
+    for arg in unknown --
+      set -l output (fry $arg)
+      assert_equal 0 $status
+      assert_includes $help_output $output
+    end
   end
 
   function test_ruby_switch
@@ -43,13 +51,6 @@ function suite_fry
     assert_equal 0 $status
     assert_includes "Switched to ruby 'ruby-1.9'" $output
     assert_equal $fry_rubies/ruby-1.9/bin $PATH[1]
-  end
-
-  function test_option_parsing
-    set -l help_output (fry-help)
-    set -l output (fry --)
-
-    assert_includes $help_output $output
   end
 end
 
