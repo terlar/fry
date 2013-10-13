@@ -14,12 +14,14 @@ function fry-install --description 'Install rubies (requires ruby-build)'
 
   set -l name $argv[1]
 
-  if not contains "$name" (ruby-build --definitions)
-    echo "fry-install: Unknown ruby '$name'"
-    echo
-    echo 'Available rubies:'
-    ruby-build --definitions
-    return 1
+  switch $name
+    case (ruby-build --definitions)
+    case '*'
+      echo "fry-install: Unknown ruby '$name'"
+      echo
+      echo 'Available rubies:'
+      ruby-build --definitions
+      return 1
   end
 
   ruby-build $name $fry_rubies/$name
