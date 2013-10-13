@@ -4,7 +4,6 @@ function fry-install --description 'Install rubies (requires ruby-build)'
     return 1
   end
 
-
   if test (count $argv) -eq 0
     echo 'fry-install: No <ruby> given'
     echo
