@@ -1,15 +1,15 @@
 function fry-install --description 'Install rubies (requires ruby-build)'
   if not test (which ruby-build)
-    echo 'fry-install: This feature requires ruby-build'
+    echo 'fatal: This feature requires ruby-build'
     return 1
   end
 
   if test (count $argv) -eq 0
-    echo 'fry-install: No <ruby> given'
+    echo 'usage: fry install <ruby>'
     echo
     echo 'Available rubies:'
     ruby-build --definitions
-    return 1
+    return
   end
 
   set -l name $argv[1]
@@ -17,7 +17,8 @@ function fry-install --description 'Install rubies (requires ruby-build)'
   switch $name
     case (ruby-build --definitions)
     case '*'
-      echo "fry-install: Unknown ruby '$name'"
+      echo "error: unknown ruby `$name'"
+      echo 'usage: fry install <ruby>'
       echo
       echo 'Available rubies:'
       ruby-build --definitions

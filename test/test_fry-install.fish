@@ -23,14 +23,14 @@ function suite_fry-install
     stub which which_stub
 
     refute (fry-install)
-    assert_equal 'fry-install: This feature requires ruby-build' (fry-install)
+    assert_equal 'fatal: This feature requires ruby-build' (fry-install)
   end
 
   function test_argument_validation
     set -l output (fry-install)
 
-    assert_equal 1 $status
-    assert_includes 'fry-install: No <ruby> given' $output
+    assert_equal 0 $status
+    assert_includes 'usage: fry install <ruby>' $output
     assert_includes 'Available rubies:' $output
     assert_includes 'ruby-2.0' $output
   end
@@ -44,7 +44,8 @@ function suite_fry-install
     set -l output (fry-install unknown)
 
     assert_equal 1 $status
-    assert_includes "fry-install: Unknown ruby 'unknown'" $output
+    assert_includes "error: unknown ruby `unknown'" $output
+    assert_includes 'usage: fry install <ruby>' $output
     assert_includes 'Available rubies:' $output
     assert_includes 'ruby-2.0' $output
   end
