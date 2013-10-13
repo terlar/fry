@@ -16,7 +16,7 @@ function suite_fry
     rm -r /tmp/rubies
   end
 
-  function test_no_arguments
+  function test_empty_arguments
     assert (fry)
     assert_includes (fry-rubies) (fry)
   end

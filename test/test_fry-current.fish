@@ -38,13 +38,11 @@ function suite_fry-current
   end
 
   function test_help_options
-    set -l output (fry-current -h)
-    assert_equal 0 $status
-    assert_includes 'usage: fry current [options]' $output
-
-    set -l output (fry-current --help)
-    assert_equal 0 $status
-    assert_includes 'usage: fry current [options]' $output
+    for arg in -h --help
+      set -l output (fry-current $arg)
+      assert_equal 0 $status
+      assert_includes 'usage: fry current [options]' $output
+    end
   end
 
   function test_invalid_options
@@ -52,7 +50,7 @@ function suite_fry-current
 
     assert_equal 1 $status
     assert_includes "error: unknown option `--invalid'" $output
-    assert_includes 'usage: fry current [options]' $output
+    assert_includes (fry-current --help) $output
   end
 end
 
