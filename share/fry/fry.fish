@@ -16,18 +16,24 @@ if not contains $fry_path/completions $fish_complete_path
 end
 
 # Auto-switch
-if test $fry_auto_switch = 1
-  function __fry_auto_switch --on-variable PWD --description 'Auto-switch ruby version from .ruby-version file'
-    status --is-command-substitution; and return
+function __fry_auto_switch_toggle --on-variable fry_auto_switch
+  if test $fry_auto_switch = 1
+    function __fry_auto_switch --on-variable PWD --description 'Auto-switch ruby version from .ruby-version file'
+      status --is-command-substitution; and return
 
-    set -l version_file (__fry_find_version_file)
-    test -n "$version_file"; or return
+      set -l version_file (__fry_find_version_file)
+      test -n "$version_file"; or return
 
-    set -l version_data (cat $version_file)
-    test -n "$version_data"; or return
+      set -l version_data (cat $version_file)
+      test -n "$version_data"; or return
 
-    fry use $version_data >/dev/null
+      fry use $version_data >/dev/null
+    end
+
+    __fry_auto_switch
+  else
+    functions -e __fry_auto_switch
   end
-
-  __fry_auto_switch
 end
+
+__fry_auto_switch_toggle
