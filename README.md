@@ -19,10 +19,10 @@ Add the following to the `~/.config/fish/config.fish` file:
 ### Arch Linux
 
 `fry` is also available for Arch Linux in the [AUR](https://aur.archlinux.org) as the package [fry](https://aur.archlinux.org/packages/fry/) or [fry-git](https://aur.archlinux.org/packages/fry-git/).
-To install, use your favorite AUR helper (`yoaurt`, `aura`, etc.).
+To install, use your favorite AUR helper (`yaourt`, `aura`, etc.).
 
 ```sh
-$ yoaurt -S fry
+$ yaourt -S fry
 ```
 
 ### Rubies
