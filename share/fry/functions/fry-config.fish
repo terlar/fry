@@ -9,9 +9,9 @@ function fry-config --description 'Configuration for fry'
       echo
       echo 'Available configuration:'
       echo
-      echo '    auto [on|off|1|0]                   switch ruby on directory change'
-      echo '    path, rubies [<path>]               path where fry looks for rubies'
-      echo '    installer [ruby-install|ruby-build] switch ruby installer to use'
+      echo '    auto [on|off|1|0]         switch ruby on directory change'
+      echo '    path, rubies [<path>]     path where fry looks for rubies'
+      echo '    installer [<installer>]   switch ruby installer to use'
       echo
       echo 'Current configuration:'
 
