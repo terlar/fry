@@ -1,11 +1,6 @@
 # Set defaults
 set -q fry_rubies       ; or set -U fry_rubies $HOME/.rubies
 set -q fry_auto_switch  ; or set -U fry_auto_switch 0
-if not set -q fry_installer
-  for command in ruby-build ruby-install
-    test (which $command); and set -U fry_installer $command
-  end
-end
 
 test -d $fry_rubies; or mkdir -p $fry_rubies
 
@@ -19,6 +14,25 @@ end
 if not contains $fry_path/completions $fish_complete_path
   set fish_complete_path $fry_path/completions $fish_complete_path
 end
+
+# Installer
+if not set -q fry_installer
+  for command in (fry installers)
+    test (which $command); and set -U fry_installer $command
+  end
+end
+
+function __fry_installer_toggle --on-variable fry_installer
+  set -l installer fry-installer-$fry_installer
+
+  if functions -q $installer
+    eval $installer
+  else
+    functions -e __fry_install_ruby
+    functions -e __fry_install_rubies
+  end
+end
+__fry_installer_toggle
 
 # Auto-switch
 function __fry_auto_switch_toggle --on-variable fry_auto_switch
@@ -40,5 +54,4 @@ function __fry_auto_switch_toggle --on-variable fry_auto_switch
     functions -e __fry_auto_switch
   end
 end
-
 __fry_auto_switch_toggle
