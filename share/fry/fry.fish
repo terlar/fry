@@ -1,6 +1,11 @@
 # Set defaults
 set -q fry_rubies       ; or set -U fry_rubies $HOME/.rubies
 set -q fry_auto_switch  ; or set -U fry_auto_switch 0
+if not set -q fry_installer
+  for command in ruby-build ruby-install
+    test (which $command); and set -U fry_installer $command
+  end
+end
 
 test -d $fry_rubies; or mkdir -p $fry_rubies
 
