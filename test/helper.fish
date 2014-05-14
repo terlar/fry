@@ -4,8 +4,13 @@ if not test -e $fish_tank
   exit 1
 end
 
+function fry_installer
+  echo fry_installer $argv
+end
+
 set -g fry_rubies /tmp/rubies
 set -g fry_auto_switch 0
+set -g fry_installer fry_installer
 
 source $fish_tank
 source (dirname (status -f))/../share/fry/fry.fish
