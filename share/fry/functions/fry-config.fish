@@ -9,11 +9,13 @@ function fry-config --description 'Configuration for fry'
       echo
       echo 'Available configuration:'
       echo
-      echo '    auto [on|off|1|0]            switch ruby on directory change'
-      echo '    path, rubies [<path>]        path where fry looks for rubies'
+      echo '    auto [on|off|1|0]         switch ruby on directory change'
+      echo '    path, rubies [<path>]     path where fry looks for rubies'
+      echo '    installer [<installer>]   switch ruby installer to use'
       echo
       echo 'Current configuration:'
-      for name in auto path
+
+      for name in auto path installer
         echo '    '(fry-config $name)
       end
     case auto
@@ -36,5 +38,10 @@ function fry-config --description 'Configuration for fry'
         set fry_rubies $argv[2]
       end
       echo "Path: $fry_rubies"
+    case installer
+      if set -q argv[2]
+        set fry_installer $argv[2]
+      end
+      echo "Installer: $fry_installer"
   end
 end

@@ -26,6 +26,6 @@ complete -f -c fry -n '__fish_fry_needs_command' -a '(fry ls)' -d 'Ruby'
 complete -f -c fry -n '__fish_fry_using_command use' -a '(fry ls)' -d 'Ruby'
 complete -f -c fry -n '__fish_fry_using_command config' -a 'auto path rubies' -d 'Config'
 
-if test (which ruby-build)
-  complete -f -c fry -n '__fish_fry_using_command install' -a '(ruby-build --definitions)' -d 'Ruby'
+if functions -q __fry_install_rubies
+  complete -f -c fry -n '__fish_fry_using_command install' -a '(__fry_install_rubies)' -d 'Ruby'
 end

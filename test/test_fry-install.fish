@@ -1,29 +1,25 @@
 function suite_fry-install
   function setup
-    function which_stub
-      switch $argv
-        case 'ruby-build'; echo '/dev/null/ruby-build'
+    function fry-installer-dummy-install
+      function __fry_install_ruby
+        echo install $argv
       end
-    end
-    stub which which_stub
 
-    function ruby-build_stub
-      switch $argv[1]
-        case '--definitions'; echo 'ruby-2.0'
-        case '*'            ; echo "ruby-build $argv"
+      function __fry_install_rubies
+        echo ruby-1
+        echo ruby-2
       end
     end
-    stub ruby-build ruby-build_stub
 
     stub_var fry_rubies /tmp/rubies
+    stub_var fry_installer dummy-install
   end
 
   function test_missing_build_command
-    function which_stub; end
-    stub which which_stub
+    set fry_installer unknown-install
 
     refute (fry-install)
-    assert_equal 'fatal: This feature requires ruby-build' (fry-install)
+    assert_equal 'fatal: This feature requires an installer' (fry-install)
   end
 
   function test_argument_validation
@@ -32,7 +28,8 @@ function suite_fry-install
     assert_equal 0 $status
     assert_includes 'usage: fry install <ruby>' $output
     assert_includes 'Available rubies:' $output
-    assert_includes 'ruby-2.0' $output
+    assert_includes 'ruby-1' $output
+    assert_includes 'ruby-2' $output
   end
 
   function test_handling_of_bad_arguments
@@ -47,12 +44,13 @@ function suite_fry-install
     assert_includes "error: unknown ruby `unknown'" $output
     assert_includes 'usage: fry install <ruby>' $output
     assert_includes 'Available rubies:' $output
-    assert_includes 'ruby-2.0' $output
+    assert_includes 'ruby-1' $output
+    assert_includes 'ruby-2' $output
   end
 
   function test_known_ruby
-    assert (fry-install ruby-2.0)
-    assert_equal 'ruby-build ruby-2.0 /tmp/rubies/ruby-2.0' (fry-install ruby-2.0)
+    assert (fry-install ruby-2)
+    assert_equal 'install ruby-2' (fry-install ruby-2)
   end
 end
 
