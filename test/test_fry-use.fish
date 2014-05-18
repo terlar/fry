@@ -56,6 +56,17 @@ function suite_fry-use
     assert_equal 0 $status
     assert_empty $output
   end
+
+  function test_rubinius_includes_gems_bin_in_path
+    mkdir -p $fry_rubies/rbx-2.2.6/bin
+    mkdir -p $fry_rubies/rbx-2.2.6/gems/bin
+
+    fry-use rbx-2.2.6 >/dev/null
+
+    refute_includes $fry_rubies/ruby-2.0/bin $PATH
+    assert_equal $fry_rubies/rbx-2.2.6/bin $PATH[1]
+    assert_equal $fry_rubies/rbx-2.2.6/gems/bin $PATH[2]
+  end
 end
 
 if not set -q tank_running
