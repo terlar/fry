@@ -86,11 +86,17 @@ fry config installer
 fry config installer ruby-install
 ```
 
-#### Pow
+#### Prax/Pow
 
-When you have a .ruby-version file in your home directory this will be used by pow as default.
-If you want it to pickup the custom ruby-version per project you have to create a `.powenv` inside
-the project folder with the following content:
+If you are using [prax](https://github.com/ysbaddaden/prax) or
+[pow](https://github.com/basecamp/pow) you can make it utilize the
+auto-switching capability.
+
+When you have a `.ruby-version` file in your home directory this will be
+used used by as default. If you want it to pickup the custom
+ruby-version per project you have to create a `.praxconfig` in your
+home directory or for pow, you need to create a `.powenv` inside every
+project folder. With the following content:
 ```sh
 export PATH="$(fish -c 'fry current --path'):$PATH"
 ```
