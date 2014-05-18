@@ -93,10 +93,10 @@ If you are using [prax](https://github.com/ysbaddaden/prax) or
 auto-switching capability.
 
 When you have a `.ruby-version` file in your home directory this will be
-used used by as default. If you want it to pickup the custom
-ruby-version per project you have to create a `.praxconfig` in your
-home directory or for pow, you need to create a `.powenv` inside every
-project folder. With the following content:
+used used by default. If you want it to pickup the custom ruby-version
+per project you have to create a `.praxconfig` in your home directory or
+for pow, you need to create a `.powenv` inside every project folder.
+With the following content:
 ```sh
 export PATH="$(fish -c 'fry current --path'):$PATH"
 ```
