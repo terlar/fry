@@ -36,6 +36,9 @@ with autocompletion and building to the correct destination.
 To install rubies this way, run the following command:
 
 ```sh
+# To see available rubies
+fry install
+# To install a specific ruby version
 fry install jruby-1.7.9
 ```
 
