@@ -72,20 +72,6 @@ fry config auto on
 fry config auto off
 ```
 
-### Installer
-
-If you want to select which installer `fry` should use, you can do it
-through this option. There are currently support for `ruby-install` and
-`ruby-build`. But you could easily define your own wrapper if you use
-some other tool.
-
-```sh
-# To see the installer used
-fry config installer
-# To set the desired installer
-fry config installer ruby-install
-```
-
 #### Prax/Pow
 
 If you are using [prax](https://github.com/ysbaddaden/prax) or
@@ -99,6 +85,20 @@ for pow, you need to create a `.powenv` inside every project folder.
 With the following content:
 ```sh
 export PATH="$(fish -c 'fry current --path'):$PATH"
+```
+
+### Installer
+
+If you want to select which installer `fry` should use, you can do it
+through this option. There are currently support for `ruby-install` and
+`ruby-build`. But you could easily define your own wrapper if you use
+some other tool.
+
+```sh
+# To see the installer used
+fry config installer
+# To set the desired installer
+fry config installer ruby-install
 ```
 
 ### Default Ruby
