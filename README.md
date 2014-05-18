@@ -29,15 +29,15 @@ $ yaourt -S fry
 
 By default `fry` will look for rubies in `~/.rubies`. This can be configured as you like.
 
-#### ruby-build
-If you have [ruby-build](https://github.com/sstephenson/ruby-build) installed, `fry` provides a wrapper
+#### Install (with ruby-install or ruby-build)
+If you have [ruby-install](https://github.com/postmodern/ruby-install) or
+[ruby-build](https://github.com/sstephenson/ruby-build) installed, `fry` provides a wrapper
 with autocompletion and building to the correct destination.
 To install rubies this way, run the following command:
 
 ```sh
-fry install 1.9.3-p392
+fry install jruby-1.7.9
 ```
-
 
 ## Configuration
 
