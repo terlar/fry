@@ -72,6 +72,20 @@ fry config auto on
 fry config auto off
 ```
 
+### Installer
+
+If you want to select which installer `fry` should use, you can do it
+through this option. There are currently support for `ruby-install` and
+`ruby-build`. But you could easily define your own wrapper if you use
+some other tool.
+
+```sh
+# To see the installer used
+fry config installer
+# To set the desired installer
+fry config installer ruby-install
+```
+
 #### Pow
 
 When you have a .ruby-version file in your home directory this will be used by pow as default.
