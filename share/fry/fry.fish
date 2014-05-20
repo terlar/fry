@@ -18,7 +18,7 @@ end
 # Installer
 if not set -q fry_installer
   for command in (fry installers)
-    test (which $command); and set -U fry_installer $command
+    type -f $command >/dev/null; and set -U fry_installer $command
   end
 end
 
