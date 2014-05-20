@@ -1,5 +1,5 @@
 NAME=fry
-VERSION=0.1.0
+VERSION=0.1.1
 AUTHOR=terlar
 URL=https://github.com/$(AUTHOR)/$(NAME)
 
