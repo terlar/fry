@@ -1,9 +1,10 @@
 function fry-current --description 'Show the current ruby'
-  set -l option_path
+  set -l show_path 0
 
   for arg in $argv
     switch $arg
-      case '--path'; set option_path 1
+      case '--path'
+        set show_path 1
       case '-h' '--help'
         echo 'usage: fry current [options]'
         echo
@@ -18,7 +19,7 @@ function fry-current --description 'Show the current ruby'
 
   for i in $PATH
     if test (echo $i | grep $fry_rubies)
-      if set -ql option_path[1]
+      if test $show_path -eq 1
         echo $i
       else
         basename (dirname $i)
@@ -28,7 +29,7 @@ function fry-current --description 'Show the current ruby'
     end
   end
 
-  if set -ql option_path[1]
+  if test $show_path -eq 1
     dirname (which ruby)
   else
     echo 'system'
