@@ -1,8 +1,20 @@
 function suite_fry-install
   function setup
-    function fry-installer-dummy-install
+    function fry-installer-success-install
       function __fry_install_ruby
         echo install $argv
+        return 0
+      end
+
+      function __fry_install_rubies
+        echo ruby-1
+        echo ruby-2
+      end
+    end
+
+    function fry-installer-error-install
+      function __fry_install_ruby
+        return 1
       end
 
       function __fry_install_rubies
@@ -12,7 +24,7 @@ function suite_fry-install
     end
 
     stub_var fry_rubies /tmp/rubies
-    stub_var fry_installer dummy-install
+    stub_var fry_installer success-install
   end
 
   function test_missing_build_command
@@ -32,23 +44,18 @@ function suite_fry-install
     assert_includes 'ruby-2' $output
   end
 
-  function test_handling_of_bad_arguments
-    refute (fry-install -l)
-    refute (fry-install --help)
-  end
-
-  function test_unknown_ruby
+  function test_failed_install
+    set fry_installer error-install
     set -l output (fry-install unknown)
 
     assert_equal 1 $status
-    assert_includes "error: unknown ruby `unknown'" $output
     assert_includes 'usage: fry install <ruby>' $output
     assert_includes 'Available rubies:' $output
     assert_includes 'ruby-1' $output
     assert_includes 'ruby-2' $output
   end
 
-  function test_known_ruby
+  function test_successful_install
     assert (fry-install ruby-2)
     assert_equal 'install ruby-2' (fry-install ruby-2)
   end

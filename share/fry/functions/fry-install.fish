@@ -12,16 +12,16 @@ function fry-install --description 'Install rubies (requires an installer)'
     return
   end
 
-  set -l name $argv[1]
+  set -l output (__fry_install_ruby $argv[1])
 
-  if not contains -- $name (__fry_install_rubies)
-    echo "error: unknown ruby `$name'"
+  if test $status -eq 0
+    echo $output
+    return 0
+  else
     echo 'usage: fry install <ruby>'
     echo
     echo 'Available rubies:'
     __fry_install_rubies
     return 1
   end
-
-  __fry_install_ruby $name
 end
