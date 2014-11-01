@@ -19,7 +19,7 @@ end
 if not set -q fry_installer
 	for command in (fry installers)
 		type -f $command >/dev/null; and set -U fry_installer $command
-end
+	end
 end
 
 function __fry_installer_toggle --on-variable fry_installer

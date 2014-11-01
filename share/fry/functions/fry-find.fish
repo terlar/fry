@@ -3,8 +3,8 @@ function fry-find --description 'Find ruby by name'
 	set -l rubyless_name (echo $name | sed 's/^ruby-//')
 
 	if test -d "$fry_rubies/$name"
-			echo $name
-			return
+		echo $name
+		return
 	end
 
 	for i in (fry-ls | sort -r -n)

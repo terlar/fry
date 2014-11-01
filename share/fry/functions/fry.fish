@@ -1,6 +1,6 @@
 function fry --description 'Fishy ruby switcher'
 	if test (count $argv) -eq 0
-			set argv rubies
+		set argv rubies
 	end
 
 	switch $argv[1]
