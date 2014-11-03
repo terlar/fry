@@ -25,11 +25,23 @@ To install, use your favorite AUR helper (`yaourt`, `aura`, etc.).
 $ yaourt -S fry
 ```
 
-### Rubies
+### OS X
+
+`fry` is also available for OS X in the [homebrew](http://brew.sh) as the
+formula `fry` via [tap](https://github.com/igas/homebrew-fry).
+
+```sh
+brew tap igas/fry
+brew install fry
+```
+
+If you want to install `master` version, add `--HEAD` to install command.
+
+## Rubies
 
 By default `fry` will look for rubies in `~/.rubies`. This can be configured as you like.
 
-#### Install (with ruby-install or ruby-build)
+### Install (with ruby-install or ruby-build)
 If you have [ruby-install](https://github.com/postmodern/ruby-install) or
 [ruby-build](https://github.com/sstephenson/ruby-build) installed, `fry` provides a wrapper
 with autocompletion and building to the correct destination.
