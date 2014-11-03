@@ -4,8 +4,8 @@ function __fry_find_version_file --description 'Find .ruby-version file'
 
 	while test $dir != '/'
 		if test -f $dir/$file
-				echo -n $dir/$file
-				return 0
+			echo -n $dir/$file
+			return 0
 		end
 
 		set dir (dirname $dir)
