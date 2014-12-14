@@ -18,15 +18,17 @@ function fry-current --description 'Show the current ruby'
 	end
 
 	for i in $PATH
-		if test (echo $i | grep $fry_rubies)
-			if test $show_path -eq 1
-				echo $i
-			else
-				basename (dirname $i)
-			end
-
-			return
+		if test (expr $i : $fry_rubies) -eq 0
+			continue
 		end
+
+		if test $show_path -eq 1
+			echo $i
+		else
+			basename (dirname $i)
+		end
+
+		return
 	end
 
 	if test $show_path -eq 1
