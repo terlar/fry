@@ -1,11 +1,7 @@
 function suite_fry-ls
 	function setup
-		stub_var fry_rubies /tmp/rubies
+		stub_var fry_rubies (stub_dir)
 		mkdir -p $fry_rubies/ruby-2.0/bin
-	end
-
-	function teardown
-		rm -r /tmp/rubies
 	end
 
 	function test_exit_status

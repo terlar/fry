@@ -1,13 +1,9 @@
 function suite_fry-use
 	function setup
-		stub_var fry_rubies /tmp/rubies
+		stub_var fry_rubies (stub_dir)
 		mkdir -p $fry_rubies/ruby-1.9/bin
 		mkdir -p $fry_rubies/ruby-2.0/bin
 		stub_var PATH $fry_rubies/ruby-2.0/bin $PATH
-	end
-
-	function teardown
-		rm -r /tmp/rubies
 	end
 
 	function test_empty_arguments

@@ -1,16 +1,12 @@
 function suite_fry-find
 	function setup
-		stub_var fry_rubies /tmp/rubies
+		stub_var fry_rubies (stub_dir)
 		mkdir -p $fry_rubies/1.8.7-p371
 		mkdir -p $fry_rubies/1.8.7-p374
 		mkdir -p $fry_rubies/1.9.3
 		mkdir -p $fry_rubies/1.9.3-p392
 		mkdir -p $fry_rubies/jruby-1.7.3
 		mkdir -p $fry_rubies/ruby-2.0.0-p0
-	end
-
-	function teardown
-		rm -r /tmp/rubies
 	end
 
 	function test_exit_status

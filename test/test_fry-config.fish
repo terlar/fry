@@ -1,7 +1,7 @@
 function suite_fry-config
 	function setup
 		stub_var fry_auto_switch 0
-		stub_var fry_rubies /tmp/rubies
+		stub_var fry_rubies (stub_dir)
 		stub_var fry_installer installer
 	end
 
@@ -28,11 +28,14 @@ function suite_fry-config
 	end
 
 	function test_path_config
+		set -l original_path $fry_rubies
+		set -l other_path stub_dir
+
 		for command in path rubies
-			assert_equal 'Path: /tmp/rubies' (fry-config $command)
-			assert_equal 'Path: /tmp/rubiez' (fry-config $command /tmp/rubiez)
-			assert_equal $fry_rubies /tmp/rubiez
-			set fry_rubies /tmp/rubies
+			assert_equal "Path: $original_path" (fry-config $command)
+			assert_equal "Path: $other_path" (fry-config $command $other_path)
+			assert_equal $fry_rubies $other_path
+			set fry_rubies $original_path
 		end
 	end
 

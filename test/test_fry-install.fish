@@ -23,7 +23,7 @@ function suite_fry-install
 			end
 		end
 
-		stub_var fry_rubies /tmp/rubies
+		stub_var fry_rubies (stub_dir)
 		stub_var fry_installer success-install
 	end
 

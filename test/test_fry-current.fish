@@ -1,17 +1,7 @@
 function suite_fry-current
 	function setup
-		stub_var fry_rubies /tmp/rubies
+		stub_var fry_rubies (stub_dir)
 		mkdir -p $fry_rubies/ruby-2.0/bin
-
-		stub_var system_ruby /tmp/system_ruby
-		mkdir -p $system_ruby
-		touch $system_ruby/ruby
-		chmod +x $system_ruby/ruby
-	end
-
-	function teardown
-		rm -r /tmp/rubies
-		rm -rf /tmp/system_ruby
 	end
 
 	function test_ruby_in_path
@@ -28,13 +18,17 @@ function suite_fry-current
 	function test_path_option_with_ruby_in_path
 		stub_var PATH $fry_rubies/ruby-2.0/bin $PATH
 		assert (fry-current --path)
-		assert_equal '/tmp/rubies/ruby-2.0/bin' (fry-current --path)
+		assert_equal "$fry_rubies/ruby-2.0/bin" (fry-current --path)
 	end
 
 	function test_path_option_with_ruby_not_in_path
-		stub_var PATH $system_ruby $PATH
+		set -l system_ruby (stub_file ruby)
+		set -l system_ruby_path (dirname $system_ruby)
+		chmod +x $system_ruby
+
+		stub_var PATH $system_ruby_path $PATH
 		assert (fry-current --path)
-		assert_equal $system_ruby (fry-current --path)
+		assert_equal $system_ruby_path (fry-current --path)
 	end
 
 	function test_help_options

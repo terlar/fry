@@ -4,7 +4,7 @@ function suite_fry
 		function fry-falsy ; false; end
 		function fry-args  ; echo $argv; end
 
-		stub_var fry_rubies /tmp/rubies
+		stub_var fry_rubies (stub_dir)
 		mkdir -p $fry_rubies/ruby-1.9/bin
 		stub_var PATH $PATH
 	end
@@ -13,7 +13,6 @@ function suite_fry
 		functions -e fry-truthy
 		functions -e fry-falsy
 		functions -e fry-args
-		rm -r /tmp/rubies
 	end
 
 	function test_empty_arguments
