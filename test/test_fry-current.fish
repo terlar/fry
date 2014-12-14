@@ -2,12 +2,19 @@ function suite_fry-current
 	function setup
 		stub_var fry_rubies (stub_dir)
 		mkdir -p $fry_rubies/ruby-2.0/bin
+		mkdir -p $fry_rubies/rbx-2.2.6/bin
+		mkdir -p $fry_rubies/rbx-2.2.6/gems/bin
 	end
 
 	function test_ruby_in_path
 		stub_var fish_user_paths $fry_rubies/ruby-2.0/bin
 		assert (fry-current)
 		assert_equal 'ruby-2.0' (fry-current)
+	end
+
+	function test_skips_ruby_gems_path
+		stub_var fish_user_paths $fry_rubies/rbx-2.2.6/gems/bin $fry_rubies/rbx-2.2.6/bin
+		assert_equal 'rbx-2.2.6' (fry-current)
 	end
 
 	function test_ruby_not_in_path

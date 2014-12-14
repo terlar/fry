@@ -17,15 +17,17 @@ function fry-current --description 'Show the current ruby'
 		end
 	end
 
-	for i in $fish_user_paths
-		if test (expr $i : $fry_rubies) -eq 0
+	echo $fry_rubies/(fry-ls)/bin | read -a -l available_ruby_paths
+
+	for p in $fish_user_paths
+		if not contains $p $available_ruby_paths
 			continue
 		end
 
 		if test $show_path -eq 1
-			echo $i
+			echo $p
 		else
-			basename (dirname $i)
+			basename (dirname $p)
 		end
 
 		return
