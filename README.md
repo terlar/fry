@@ -13,7 +13,7 @@ make install
 Add the following to the `~/.config/fish/config.fish` file:
 
 ```sh
-. /usr/local/share/fry/fry.fish
+source /usr/local/share/fry/fry.fish
 ```
 
 ### Arch Linux
@@ -22,7 +22,7 @@ Add the following to the `~/.config/fish/config.fish` file:
 To install, use your favorite AUR helper (`yaourt`, `aura`, etc.).
 
 ```sh
-$ yaourt -S fry
+yaourt -S fry
 ```
 
 ### OS X
@@ -44,7 +44,7 @@ By default `fry` will look for rubies in `~/.rubies`. This can be configured as 
 ### Install (with ruby-install or ruby-build)
 If you have [ruby-install](https://github.com/postmodern/ruby-install) or
 [ruby-build](https://github.com/sstephenson/ruby-build) installed, `fry` provides a wrapper
-with autocompletion and building to the correct destination.
+with auto-completion and building to the correct destination.
 To install rubies this way, run the following command:
 
 ```sh
@@ -68,6 +68,17 @@ This option determines where `fry` looks for rubies.
 fry config path
 # To set the path
 fry config path /opt/rubies
+```
+
+#### Prepend path
+
+This option determines if your ruby path should be prepended or not. However it will never be at the end of your `PATH` since we are using `fish_user_paths` which is prepended to `PATH`. However if you have specified other paths inside your `fish_user_paths` then those will have higher priority. To change this behavior you can toggle this. The default behavior is append.
+
+```sh
+# To prepend to the fish_user_paths
+fry config prepend on
+# To append to the fish_user_paths
+fry config prepend off
 ```
 
 ### Auto-Switch
@@ -94,9 +105,13 @@ When you have a `.ruby-version` file in your home directory this will be
 used used by default. If you want it to pickup the custom ruby-version
 per project you have to create a `.praxconfig` in your home directory or
 for pow, you need to create a `.powenv` inside every project folder.
-With the following content:
+
+Run the following commands:
 ```sh
-export PATH="$(fish -c 'fry current --path'):$PATH"
+# If you have auto-switch, it will use whatever is specified in your .ruby-version
+fry env > ~/.praxconfig
+# Specify a specific ruby to run
+fry env rbx-2.2.6 > ~/ruby_project/.praxenv
 ```
 
 ### Installer
@@ -107,6 +122,8 @@ through this option. There are currently support for `ruby-install` and
 some other tool.
 
 ```sh
+# To list available installer wrappers
+fry installers
 # To see the installer used
 fry config installer
 # To set the desired installer
