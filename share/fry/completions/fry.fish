@@ -24,7 +24,8 @@ end
 complete -f -c fry -n '__fish_fry_needs_command' -a '(__fish_fry)'
 complete -f -c fry -n '__fish_fry_needs_command' -a '(fry ls)' -d 'Ruby'
 complete -f -c fry -n '__fish_fry_using_command use' -a '(fry ls)' -d 'Ruby'
-complete -f -c fry -n '__fish_fry_using_command config' -a 'auto path rubies' -d 'Config'
+complete -f -c fry -n '__fish_fry_using_command env' -a '(fry ls)' -d 'Ruby'
+complete -f -c fry -n '__fish_fry_using_command config' -a 'auto prepend path rubies' -d 'Config'
 
 if functions -q __fry_install_rubies
 	complete -f -c fry -n '__fish_fry_using_command install' -a '(__fry_install_rubies)' -d 'Ruby'
