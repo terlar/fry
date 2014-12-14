@@ -17,14 +17,6 @@ if not contains $fry_path/completions $fish_complete_path
 end
 
 # Installer
-if not set -q fry_installer
-	for command in (fry installers)
-		if type -fq $command
-			set -U fry_installer $command
-		end
-	end
-end
-
 function __fry_installer_toggle --on-variable fry_installer
 	set -l installer fry-installer-$fry_installer
 
@@ -35,7 +27,14 @@ function __fry_installer_toggle --on-variable fry_installer
 		functions -e __fry_install_rubies
 	end
 end
-__fry_installer_toggle
+
+if not set -q fry_installer
+	for command in (fry installers)
+		if type -fq $command
+			set -U fry_installer $command
+		end
+	end
+end
 
 # Auto-switch
 function __fry_auto_switch_toggle --on-variable fry_auto_switch
