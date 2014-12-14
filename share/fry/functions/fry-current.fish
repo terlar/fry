@@ -17,7 +17,7 @@ function fry-current --description 'Show the current ruby'
 		end
 	end
 
-	for i in $PATH
+	for i in $fish_user_paths
 		if test (expr $i : $fry_rubies) -eq 0
 			continue
 		end

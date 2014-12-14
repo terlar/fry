@@ -34,10 +34,11 @@ function fry-use --description 'Use the ruby given by <ruby>'
 	else
 		switch $name
 			case 'rbx-*'
-				set PATH $fry_rubies/$ruby/gems/bin $PATH
+				set -g fish_user_paths $fish_user_paths $fry_rubies/$ruby/gems/bin
 		end
 
-		set PATH $fry_rubies/$ruby/bin $PATH
+		set -g fish_user_paths $fish_user_paths $fry_rubies/$ruby/bin
+
 		echo "Switched to ruby '$ruby'"
 	end
 end

@@ -6,7 +6,8 @@ function suite_fry
 
 		stub_var fry_rubies (stub_dir)
 		mkdir -p $fry_rubies/ruby-1.9/bin
-		stub_var PATH $PATH
+		mkdir -p $fry_rubies/ruby-2.0/bin
+		stub_var fish_user_paths $fry_rubies/ruby-1.9/bin
 	end
 
 	function teardown
@@ -48,11 +49,11 @@ function suite_fry
 	end
 
 	function test_ruby_switch
-		set -l output (fry ruby-1.9)
+		set -l output (fry ruby-2.0)
 
 		assert_equal 0 $status
-		assert_includes "Switched to ruby 'ruby-1.9'" $output
-		assert_equal $fry_rubies/ruby-1.9/bin $PATH[1]
+		assert_includes "Switched to ruby 'ruby-2.0'" $output
+		assert_equal $fry_rubies/ruby-2.0/bin $PATH[1]
 	end
 end
 

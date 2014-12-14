@@ -4,7 +4,7 @@ function suite_fry-rubies
 		mkdir -p $fry_rubies/ruby-1.8/bin
 		mkdir -p $fry_rubies/ruby-1.9/bin
 		mkdir -p $fry_rubies/ruby-2.0/bin
-		stub_var PATH $fry_rubies/ruby-1.9/bin $PATH
+		stub_var fish_user_paths $fry_rubies/ruby-1.9/bin
 	end
 
 	function test_exit_status
