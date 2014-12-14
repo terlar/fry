@@ -63,6 +63,24 @@ function suite_fry-use
 		assert_equal $fry_rubies/rbx-2.2.6/gems/bin $PATH[1]
 		assert_equal $fry_rubies/rbx-2.2.6/bin $PATH[2]
 	end
+
+	function test_ruby_switch_without_prepend
+		stub_var fry_prepend_path 0
+		set fish_user_paths (stub_dir)
+
+		fry-use ruby-1.9 >/dev/null
+
+		assert_equal $fry_rubies/ruby-1.9/bin $PATH[2]
+	end
+
+	function test_ruby_switch_with_prepend
+		stub_var fry_prepend_path 1
+		set fish_user_paths (stub_dir)
+
+		fry-use ruby-1.9 >/dev/null
+
+		assert_equal $fry_rubies/ruby-1.9/bin $PATH[1]
+	end
 end
 
 if not set -q tank_running
