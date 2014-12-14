@@ -1,8 +1,8 @@
 language: c
 before_install:
-  - sudo apt-get install bc
-  - curl -O http://fishshell.com/files/2.1.0/linux/Ubuntu/fish_2.1.0-1~precise_amd64.deb
-  - sudo dpkg --install fish_2.1.0-1~precise_amd64.deb
+  - sudo add-apt-repository -y ppa:fish-shell/nightly-master
+  - sudo apt-get update
+  - sudo apt-get -y install fish
   - git clone git://github.com/terlar/fish-tank.git
   - cd fish-tank
   - sudo make install
