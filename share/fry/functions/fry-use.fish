@@ -32,12 +32,21 @@ function fry-use --description 'Use the ruby given by <ruby>'
 	if test $name = 'system'
 		echo 'Switched to system ruby'
 	else
+		set -l ruby_paths
+
 		switch $name
 			case 'rbx-*'
-				set PATH $fry_rubies/$ruby/gems/bin $PATH
+				set ruby_paths $ruby_paths $fry_rubies/$ruby/gems/bin
 		end
 
-		set PATH $fry_rubies/$ruby/bin $PATH
+		set ruby_paths $ruby_paths $fry_rubies/$ruby/bin
+
+		if test $fry_prepend_path -eq 1
+			set -g fish_user_paths $ruby_paths $fish_user_paths
+		else
+			set -g fish_user_paths $fish_user_paths $ruby_paths
+		end
+
 		echo "Switched to ruby '$ruby'"
 	end
 end

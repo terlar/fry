@@ -1,6 +1,7 @@
 function suite_fry-config
 	function setup
 		stub_var fry_auto_switch 0
+		stub_var fry_prepend_path 0
 		stub_var fry_rubies (stub_dir)
 		stub_var fry_installer installer
 	end
@@ -12,6 +13,7 @@ function suite_fry-config
 
 	function test_help
 		set -l auto_output (fry-config auto)
+		set -l prepend_output (fry-config prepend)
 		set -l path_output (fry-config path)
 		set -l installer_output (fry-config installer)
 
@@ -19,11 +21,18 @@ function suite_fry-config
 			set -l output (fry-config $arg)
 
 			assert_equal 0 $status
-			assert_match $auto_output $output
-			assert_match $path_output $output
-			assert_match $installer_output $output
 			assert_includes 'usage: fry config <name> [<value>]' $output
 			assert_includes 'Available configuration:' $output
+			assert_match $auto_output $output
+			assert_match $prepend_output $output
+			assert_match $path_output $output
+			assert_match $installer_output $output
+
+			assert_includes 'Current configuration:' $output
+			assert_includes '    Auto-Switch: off' $output
+			assert_includes '    Prepend Path: off' $output
+			assert_includes "    Path: $fry_rubies" $output
+			assert_includes "    Installer: $fry_installer" $output
 		end
 	end
 
@@ -53,6 +62,22 @@ function suite_fry-config
 
 		assert_equal 'Auto-Switch: off' (fry-config auto 0)
 		assert_equal $fry_auto_switch 0
+	end
+
+	function test_prepend_path_config
+		assert_equal 'Prepend Path: off' (fry-config prepend)
+
+		assert_equal 'Prepend Path: on' (fry-config prepend on)
+		assert_equal $fry_prepend_path 1
+
+		assert_equal 'Prepend Path: off' (fry-config prepend off)
+		assert_equal $fry_prepend_path 0
+
+		assert_equal 'Prepend Path: on' (fry-config prepend 1)
+		assert_equal $fry_prepend_path 1
+
+		assert_equal 'Prepend Path: off' (fry-config prepend 0)
+		assert_equal $fry_prepend_path 0
 	end
 
 	function test_installer_config

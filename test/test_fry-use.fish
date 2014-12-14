@@ -3,7 +3,7 @@ function suite_fry-use
 		stub_var fry_rubies (stub_dir)
 		mkdir -p $fry_rubies/ruby-1.9/bin
 		mkdir -p $fry_rubies/ruby-2.0/bin
-		stub_var PATH $fry_rubies/ruby-2.0/bin $PATH
+		stub_var fish_user_paths $fry_rubies/ruby-2.0/bin
 	end
 
 	function test_empty_arguments
@@ -60,8 +60,26 @@ function suite_fry-use
 		fry-use rbx-2.2.6 >/dev/null
 
 		refute_includes $fry_rubies/ruby-2.0/bin $PATH
-		assert_equal $fry_rubies/rbx-2.2.6/bin $PATH[1]
-		assert_equal $fry_rubies/rbx-2.2.6/gems/bin $PATH[2]
+		assert_equal $fry_rubies/rbx-2.2.6/gems/bin $PATH[1]
+		assert_equal $fry_rubies/rbx-2.2.6/bin $PATH[2]
+	end
+
+	function test_ruby_switch_without_prepend
+		stub_var fry_prepend_path 0
+		set fish_user_paths (stub_dir)
+
+		fry-use ruby-1.9 >/dev/null
+
+		assert_equal $fry_rubies/ruby-1.9/bin $PATH[2]
+	end
+
+	function test_ruby_switch_with_prepend
+		stub_var fry_prepend_path 1
+		set fish_user_paths (stub_dir)
+
+		fry-use ruby-1.9 >/dev/null
+
+		assert_equal $fry_rubies/ruby-1.9/bin $PATH[1]
 	end
 end
 

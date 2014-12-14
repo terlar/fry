@@ -5,7 +5,7 @@ function suite_fry-current
 	end
 
 	function test_ruby_in_path
-		stub_var PATH $fry_rubies/ruby-2.0/bin $PATH
+		stub_var fish_user_paths $fry_rubies/ruby-2.0/bin
 		assert (fry-current)
 		assert_equal 'ruby-2.0' (fry-current)
 	end
@@ -16,7 +16,7 @@ function suite_fry-current
 	end
 
 	function test_path_option_with_ruby_in_path
-		stub_var PATH $fry_rubies/ruby-2.0/bin $PATH
+		stub_var fish_user_paths $fry_rubies/ruby-2.0/bin
 		assert (fry-current --path)
 		assert_equal "$fry_rubies/ruby-2.0/bin" (fry-current --path)
 	end
@@ -26,7 +26,7 @@ function suite_fry-current
 		set -l system_ruby_path (dirname $system_ruby)
 		chmod +x $system_ruby
 
-		stub_var PATH $system_ruby_path $PATH
+		stub_var fish_user_paths $system_ruby_path
 		assert (fry-current --path)
 		assert_equal $system_ruby_path (fry-current --path)
 	end

@@ -1,7 +1,7 @@
 function __fry_reset --description 'Remove rubies from path'
 	set -l new_path
 
-	for i in $PATH
+	for i in $fish_user_paths
 		switch $i
 			case "$fry_rubies*"
 				continue
@@ -10,5 +10,5 @@ function __fry_reset --description 'Remove rubies from path'
 		end
 	end
 
-	set PATH $new_path
+	set fish_user_paths $new_path
 end
