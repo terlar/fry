@@ -19,11 +19,16 @@ function suite_fry-config
 			set -l output (fry-config $arg)
 
 			assert_equal 0 $status
+			assert_includes 'usage: fry config <name> [<value>]' $output
+			assert_includes 'Available configuration:' $output
 			assert_match $auto_output $output
 			assert_match $path_output $output
 			assert_match $installer_output $output
-			assert_includes 'usage: fry config <name> [<value>]' $output
-			assert_includes 'Available configuration:' $output
+
+			assert_includes 'Current configuration:' $output
+			assert_includes '    Auto-Switch: off' $output
+			assert_includes "    Path: $fry_rubies" $output
+			assert_includes "    Installer: $fry_installer" $output
 		end
 	end
 
