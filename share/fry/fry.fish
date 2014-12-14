@@ -34,6 +34,8 @@ if not set -q fry_installer
 			set -U fry_installer $command
 		end
 	end
+else
+	__fry_installer_toggle
 end
 
 # Auto-switch
