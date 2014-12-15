@@ -59,4 +59,5 @@ uninstall:
 	for file in $(INSTALL_FILES); do rm -f $(PREFIX)/$$file; done
 	rm -rf $(DOC_DIR)
 
+.DEFAULT_GOAL:=build
 .PHONY: build download sign verify clean test tag release install uninstall all
