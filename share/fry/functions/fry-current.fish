@@ -17,7 +17,7 @@ function fry-current --description 'Show the current ruby'
 		end
 	end
 
-	echo $fry_rubies/(fry-ls)/bin | read -a -l available_ruby_paths
+	set -l available_ruby_paths (printf '%s\n' $fry_rubies/(fry-ls)/bin)
 
 	for p in $fish_user_paths
 		if not contains $p $available_ruby_paths
