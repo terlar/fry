@@ -1,0 +1,6 @@
+.git
+.vagrant
+Vagrantfile
+Dockerfile
+pkg
+script
