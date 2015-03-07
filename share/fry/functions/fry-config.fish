@@ -59,5 +59,8 @@ function fry-config --description 'Configuration for fry'
 				set fry_installer $argv[2]
 			end
 			echo "Installer: $fry_installer"
+		case '*'
+			fry-config help
+			return 1
 	end
 end

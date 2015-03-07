@@ -36,6 +36,12 @@ function suite_fry-config
 		end
 	end
 
+	function test_unknown_command
+		set -l output (fry-config unknown)
+		assert_equal 1 $status
+		assert_includes 'usage: fry config <name> [<value>]' $output
+	end
+
 	function test_path_config
 		set -l original_path $fry_rubies
 		set -l other_path stub_dir
