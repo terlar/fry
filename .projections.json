@@ -1,0 +1,16 @@
+{
+  "share/fry/functions/*.fish": {
+    "alternate": "test/test_{}.fish"
+  },
+  "test/test_*.fish": {
+    "alternate": "share/fry/functions/{}.fish",
+    "dispatch": "fish %"
+  },
+  "*.md": {
+    "type": "doc"
+  },
+  "*": {
+    "make": "make test",
+    "start": "docker run --rm -it fry"
+  }
+}
