@@ -11,6 +11,7 @@ RUN echo "deb http://download.opensuse.org/repositories/shells:/fish:/release:/2
 		ca-certificates \
 		curl \
 		make \
+		ruby-build \
 	&& curl -Lso fish-tank-master.tar.gz https://github.com/terlar/fish-tank/archive/master.tar.gz \
 	&& tar -zxf fish-tank-master.tar.gz \
 	&& cd fish-tank-master && make install \
