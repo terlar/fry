@@ -12,8 +12,8 @@ function fry-installer-ruby-install --description 'Installer for ruby-install'
 			case '  *:'
 				set implementation (echo $line | sed 's/[[:space:]]*\([[:alpha:]]*\):/\1/')
 
-			case '    *:*'
-				set -l ver (echo $line | sed 's/[[:space:]]*\(.*\):.*/\1/')
+			case '*'
+				set -l ver (echo $line | sed 's/[[:space:]]*\(.*\)$/\1/')
 				echo $implementation-$ver
 			end
 		end
