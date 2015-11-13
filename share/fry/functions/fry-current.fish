@@ -17,7 +17,7 @@ function fry-current --description 'Show the current ruby'
 		end
 	end
 
-	set -l available_ruby_paths (printf '%s\n' $fry_rubies/(fry-ls)/bin)
+	set -l available_ruby_paths $fry_rubies/(fry-ls)/bin
 
 	for p in $fish_user_paths
 		if not contains $p $available_ruby_paths
@@ -36,6 +36,6 @@ function fry-current --description 'Show the current ruby'
 	if test $show_path -eq 1
 		dirname (type -p ruby)
 	else
-		echo 'system'
+		echo system
 	end
 end

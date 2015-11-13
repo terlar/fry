@@ -7,7 +7,7 @@ function fry-find --description 'Find ruby by name'
 		return
 	end
 
-	for i in (fry-ls | sort -r -n)
+	for i in (fry-ls | sort -rn)
 		switch $i
 			case "$name*" "$rubyless_name*" "ruby-$name*"
 				echo $i

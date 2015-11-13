@@ -1,6 +1,6 @@
 function fry-config --description 'Configuration for fry'
 	if test (count $argv) -eq 0
-		set argv 'help'
+		set argv help
 	end
 
 	switch $argv[1]

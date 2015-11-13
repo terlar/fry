@@ -10,7 +10,7 @@ function fry-use --description 'Use the ruby given by <ruby>'
 	set -l name $argv[1]
 	set -l ruby $name
 
-	if test $name != 'system'
+	if test "$name" != system
 		set ruby (fry-find $name)
 	end
 
@@ -29,7 +29,7 @@ function fry-use --description 'Use the ruby given by <ruby>'
 
 	__fry_reset
 
-	if test $name = 'system'
+	if test "$name" = system
 		echo 'Switched to system ruby'
 	else
 		set -l ruby_paths
