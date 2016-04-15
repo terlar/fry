@@ -1,5 +1,10 @@
 # Changelog
 
+## Release 0.1.6
+
+Change installation method, don't rely on sourcing the script manually,
+but utilize the vendor directories in fish.
+
 ## Release 0.1.5
 
 - Fix fry install rubies parser for `ruby-install`.
