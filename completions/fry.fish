@@ -18,7 +18,7 @@ function __fish_fry_using_command
 end
 
 function __fish_fry
-	fry help | grep '  ' | sed 's|^ *||;s|[<[].*[]>] ||' | unexpand -t2
+	fry help | string match '  *' | string replace -r '^\s+(\w+)\s([<\[].*[\]>]\s)*\s+(.*)' '$1\t$3'
 end
 
 complete -f -c fry -n '__fish_fry_needs_command' -a '(__fish_fry)'
