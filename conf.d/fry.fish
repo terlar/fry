@@ -5,17 +5,6 @@ set -q fry_rubies       ; or set -U fry_rubies $HOME/.rubies
 
 test -d $fry_rubies; or mkdir -p $fry_rubies
 
-# Path
-set -l fry_path (dirname (status -f))
-
-if not contains $fry_path/functions $fish_function_path
-	set fish_function_path $fry_path/functions $fish_function_path
-end
-
-if not contains $fry_path/completions $fish_complete_path
-	set fish_complete_path $fry_path/completions $fish_complete_path
-end
-
 # Installer
 function __fry_installer_toggle --on-variable fry_installer
 	set -l installer fry-installer-$fry_installer

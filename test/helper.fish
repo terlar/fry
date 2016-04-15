@@ -20,4 +20,7 @@ function fry_after_all -e tank_finished
 end
 
 source $fish_tank
-source (dirname (status -f))/../share/fry/fry.fish
+
+set -l fry_project_path (realpath (dirname (status -f))/..)
+set fish_function_path $fry_project_path/functions $fish_function_path
+source $fry_project_path/conf.d/fry.fish

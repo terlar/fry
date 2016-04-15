@@ -1,0 +1,141 @@
+.TH FRY 1 "2016-04-14" "0\&.1\&.5" "fish"
+.SH NAME
+fry \- a simple ruby version manager for fish
+.SH SYNOPSIS
+.B fry
+.RI [\| ruby \|]
+.\" Run a subcommand
+.br
+.B fry
+.RI [\| command
+.IR args \|]
+.\" --help
+.br
+.B fry
+.RB [\| \-h \||\| \-\-help \|]
+.\" The subcommand find
+.br
+.B fry
+.B find
+.I search
+.\" The subcommand current
+.br
+.B fry
+.B current
+.RB [\| \--path \|]
+.RB [\| \-h \||\| \-\-help \|]
+.\" The subcommand use
+.br
+.B fry
+.B use
+.I ruby
+.\" The subcommand env
+.br
+.B fry
+.B env
+.RI [\| ruby \|]
+.\" The subcommand install
+.br
+.B fry
+.B install
+.I ruby
+.\" The subcommand config
+.br
+.B fry
+.B config
+.RI [\| name
+.RI [\| value \|]\|]
+.SH DESCRIPTION
+.B fry
+is a simple
+.I ruby
+switcher.
+.SH EXAMPLES
+.TP \w'fry\ 'u
+.B fry ls
+List available rubies.
+This is a plain output that could be used for scripting.
+.TP
+.B fry rubies
+List available rubies with the current one highlighted.
+.TP
+.BI fry\ find \ search
+Fuzzy find available ruby based on the provided
+.I search
+string.
+The result is using the latest version for an ambigous match.
+If you want to find the latest jruby you can provide the
+.I search
+jruby.
+If you are searching for MRI versions it is sufficient enough to just provide the version number.
+Providing the
+.I search
+2.1 could result in ruby-2.1.5 if that is the highest version that was installed for the 2.1 branch.
+.TP
+.B fry current
+Show the current ruby.
+.TP
+.B fry current --path
+Show the path of the current ruby.
+.TP
+.BI fry\ use \ ruby
+Use the provided
+.IR ruby .
+This will use the same logic as find to get the ruby version.
+.TP
+.B fry env
+Output POSIX compatible environment.
+This ouputs an export of the PATH variable including the prepended
+.I ruby
+path.
+.TP
+.BI fry\ env \ ruby
+Output POSIX compatible environment for the provided
+.IR ruby .
+.TP
+.BI fry\ install \ ruby
+Install the provided
+.IR ruby .
+This requires that you have one of the available installers.
+By default they are either
+.I ruby-build
+or
+.IR ruby-install .
+You can provide your own custom ruby installers by implementing a fish function named as
+.I fry-installer-implementation
+where
+.I implementation
+is the name of your implementation. This function in turn needs to define two functions inside. The function
+.I __fry_install_ruby
+which handles the installation and
+.I __fry_install_rubies
+which returns a list of available ruby versions.
+This allows for the completion script and help to output which versions are available. For more information check the implementation of the
+.I fry-installer-ruby-build
+or 
+.I fry-installer-ruby-install
+, this can be done by running
+.IR functions fry-installer-ruby-build .
+.TP
+.B fry installers
+List all available installers.
+.TP
+.B fry config
+Display the available configuration and the current configuration.
+.TP
+.BI fry\ config \ name
+Display the current configuration for the option provided by
+.IR name .
+.TP
+.BI fry\ config \ name\ value
+Set the configuration to
+.I value
+for the option provided by
+.IR name .
+.TP
+.B fry version
+Display the current version.
+.TP
+.B fry help
+Display the help information.
+.TP
