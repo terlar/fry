@@ -12,6 +12,7 @@ SIG=$(PKG_DIR)/$(PKG_NAME).asc
 # Installation directories
 PREFIX ?= /usr
 DESTDIR ?= 
+MANDIR ?= $(PREFIX)/share/man
 FISHDIR ?= $(DESTDIR)$(PREFIX)/share/fish
 
 COMPLETIONS_DIR_FILES := $(wildcard completions/*.fish)
@@ -60,6 +61,7 @@ release: tag download sign
 
 .PHONY: install
 install:
+	install -D -m644 man/man1/fry.1 "$(DESTDIR)$(MANDIR)/man1/fry.1"
 	install -D -m644 $(CURDIR)/conf.d/fry.fish $(FISHDIR)/vendor_conf.d/
 	for i in $(COMPLETIONS_DIR_FILES:%='%'); do \
 		install -D -m644 $$i $(FISHDIR)/vendor_completions.d/; \
@@ -89,5 +91,6 @@ uninstall:
 			fi; \
 		done; \
 	fi;
+	rm -rf $(MANDIR)/man1/fry.1
 
 .DEFAULT_GOAL:=build
