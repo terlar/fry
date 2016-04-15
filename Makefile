@@ -22,7 +22,7 @@ pkg:
 	mkdir $(PKG_DIR)
 
 download: pkg
-	wget -O $(PKG) $(URL)/archive/$(VERSION).tar.gz
+	wget -O $(PKG) $(URL)/archive/v$(VERSION).tar.gz
 
 .PHONY: build
 build: pkg
