@@ -7,7 +7,7 @@ URL=https://github.com/$(AUTHOR)/$(NAME)
 PKG_DIR=pkg
 PKG_NAME=$(NAME)-$(VERSION)
 PKG=$(PKG_DIR)/$(PKG_NAME).tar.gz
-SIG=$(PKG_DIR)/$(PKG_NAME).asc
+SIG=$(PKG_DIR)/$(PKG_NAME).tar.gz.asc
 
 # Installation directories
 PREFIX ?= /usr
