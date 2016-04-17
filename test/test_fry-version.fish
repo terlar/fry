@@ -8,7 +8,4 @@ function suite_fry-version
 	end
 end
 
-if not set -q tank_running
-	source (dirname (status -f))/helper.fish
-	tank_run
-end
+source (dirname (status -f))/helper.fish
