@@ -19,7 +19,7 @@ end
 
 if not set -q fry_installer
 	for command in (fry installers)
-		if type -f $command >/dev/null
+		if type -qf $command >/dev/null
 			set -U fry_installer $command
 		end
 	end
