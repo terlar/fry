@@ -1,22 +1,27 @@
-NAME=fry
-VERSION=0.1.6
-AUTHOR=terlar
-URL=https://github.com/$(AUTHOR)/$(NAME)
+NAME    := fry
+VERSION := 0.1.6
+AUTHOR  := terlar
+URL     := https://github.com/$(AUTHOR)/$(NAME)
 
 # Packaging
-PKG_DIR=pkg
-PKG_NAME=$(NAME)-$(VERSION)
-PKG=$(PKG_DIR)/$(PKG_NAME).tar.gz
-SIG=$(PKG_DIR)/$(PKG_NAME).tar.gz.asc
+PKG_DIR  := pkg
+PKG_NAME := $(NAME)-$(VERSION)
+PKG      := $(PKG_DIR)/$(PKG_NAME).tar.gz
+SIG      := $(PKG_DIR)/$(PKG_NAME).tar.gz.asc
 
 # Installation directories
-PREFIX ?= /usr
+PREFIX  ?= /usr
 DESTDIR ?= 
-MANDIR ?= $(PREFIX)/share/man
 FISHDIR ?= $(PREFIX)/share/fish
+MANDIR  ?= $(PREFIX)/share/fish/man
 
-COMPLETIONS_DIR_FILES := $(wildcard completions/*.fish)
-FUNCTIONS_DIR_FILES := $(wildcard functions/*.fish)
+CONF_DIR     ?= "/vendor_conf.d"
+COMPLETE_DIR ?= "/vendor_completions.d"
+FUNCTION_DIR ?= "/vendor_functions.d"
+
+CONF_FILES     := $(wildcard conf.d/*.fish)
+COMPLETE_FILES := $(wildcard completions/*.fish)
+FUNCTION_FILES := $(wildcard functions/*.fish)
 
 pkg:
 	mkdir $(PKG_DIR)
@@ -59,44 +64,72 @@ tag:
 .PHONY: release
 release: tag download sign
 
+.PHONY: user-install
+user-install:
+	$(MAKE) install \
+		FISHDIR=$$HOME/.config/fish \
+		MANDIR=$$HOME/.local/man \
+		CONF_DIR="/conf.d" \
+		COMPLETE_DIR="/completions" \
+		FUNCTION_DIR="/functions"
+
 .PHONY: install
 install:
 	install -m 755 -d "$(DESTDIR)$(MANDIR)"
 	install -m 755 -d "$(DESTDIR)$(MANDIR)/man1"
 	install -m 755 -d "$(DESTDIR)$(FISHDIR)"
-	install -m 755 -d "$(DESTDIR)$(FISHDIR)/vendor_conf.d"
-	install -m 755 -d "$(DESTDIR)$(FISHDIR)/vendor_completions.d"
-	install -m 755 -d "$(DESTDIR)$(FISHDIR)/vendor_functions.d"
+	install -m 755 -d "$(DESTDIR)$(FISHDIR)$(CONF_DIR)"
+	install -m 755 -d "$(DESTDIR)$(FISHDIR)$(COMPLETE_DIR)"
+	install -m 755 -d "$(DESTDIR)$(FISHDIR)$(FUNCTION_DIR)"
 	install -m 644 man/man1/fry.1 "$(DESTDIR)$(MANDIR)/man1/fry.1"
-	install -m 644 $(CURDIR)/conf.d/fry.fish "$(DESTDIR)$(FISHDIR)/vendor_conf.d/"
-	for i in $(COMPLETIONS_DIR_FILES:%='%'); do \
-		install -m 644 $$i "$(DESTDIR)$(FISHDIR)/vendor_completions.d/"; \
+	for i in $(CONF_FILES:%='%'); do \
+		install -m 644 $$i "$(DESTDIR)$(FISHDIR)$(CONF_DIR)/"; \
 		true; \
 	done;
-	for i in $(FUNCTIONS_DIR_FILES:%='%'); do \
-		install -m 644 $$i "$(DESTDIR)$(FISHDIR)/vendor_functions.d/"; \
+	for i in $(COMPLETE_FILES:%='%'); do \
+		install -m 644 $$i "$(DESTDIR)$(FISHDIR)$(COMPLETE_DIR)/"; \
+		true; \
+	done;
+	for i in $(FUNCTION_FILES:%='%'); do \
+		install -m 644 $$i "$(DESTDIR)$(FISHDIR)$(FUNCTION_DIR)/"; \
 		true; \
 	done;
 	
+.PHONY: user-uninstall
+user-uninstall:
+	$(MAKE) uninstall \
+		FISHDIR=$$HOME/.config/fish \
+		MANDIR=$$HOME/.local/man \
+		CONF_DIR="/conf.d" \
+		COMPLETE_DIR="/completions" \
+		FUNCTION_DIR="/functions"
+
 .PHONY: uninstall
 uninstall:
-	-rm -f "$(DESTDIR)$(FISHDIR)/vendor_conf.d/fry.fish"
-	-if test -d "$(DESTDIR)$(FISHDIR)/vendor_completions.d"; then \
-		for i in $(COMPLETIONS_DIR_FILES); do \
+	-if test -d "$(DESTDIR)$(FISHDIR)$(CONF_DIR)"; then \
+		for i in $(CONF_FILES); do \
 			basename=`basename $$i`; \
-			if test -f "$(DESTDIR)$(FISHDIR)/vendor_completions.d/$$basename"; then \
-				rm "$(DESTDIR)$(FISHDIR)/vendor_completions.d/$$basename"; \
+			if test -f "$(DESTDIR)$(FISHDIR)$(CONF_DIR)/$$basename"; then \
+				rm "$(DESTDIR)$(FISHDIR)$(CONF_DIR)/$$basename"; \
 			fi; \
 		done; \
 	fi;
-	-if test -d "$(DESTDIR)$(FISHDIR)/vendor_functions.d"; then \
-		for i in $(FUNCTIONS_DIR_FILES); do \
+	-if test -d "$(DESTDIR)$(FISHDIR)$(COMPLETE_DIR)"; then \
+		for i in $(COMPLETE_FILES); do \
 			basename=`basename $$i`; \
-			if test -f "$(DESTDIR)$(FISHDIR)/vendor_functions.d/$$basename"; then \
-				rm "$(DESTDIR)$(FISHDIR)/vendor_functions.d/$$basename"; \
+			if test -f "$(DESTDIR)$(FISHDIR)$(COMPLETE_DIR)/$$basename"; then \
+				rm "$(DESTDIR)$(FISHDIR)$(COMPLETE_DIR)/$$basename"; \
 			fi; \
 		done; \
 	fi;
-	rm -rf "$(DESTDIR)$(MANDIR)/man1/fry.1"
+	-if test -d "$(DESTDIR)$(FISHDIR)$(FUNCTION_DIR)"; then \
+		for i in $(FUNCTION_FILES); do \
+			basename=`basename $$i`; \
+			if test -f "$(DESTDIR)$(FISHDIR)$(FUNCTION_DIR)/$$basename"; then \
+				rm "$(DESTDIR)$(FISHDIR)$(FUNCTION_DIR)/$$basename"; \
+			fi; \
+		done; \
+	fi;
+	rm "$(DESTDIR)$(MANDIR)/man1/fry.1"
 
 .DEFAULT_GOAL:=build
