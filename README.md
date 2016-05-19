@@ -4,13 +4,35 @@ A simple ruby version manager for [fish](https://github.com/fish-shell/fish-shel
 
 ## Installation
 
+### User
+
 ```sh
-git clone git://github.com/terlar/fry.git
+git clone https://github.com/terlar/fry.git
+cd fry
+make user-install
+```
+
+#### [plug](https://github.com/terlar/fish-plug)
+
+```fish
+plug terlar/fish-plug
+```
+
+#### [fisherman](https://github.com/fisherman/fisherman)
+
+```fish
+fisherman https://github.com/terlar/fry.git
+```
+
+### System-wide
+
+```sh
+git clone https://github.com/terlar/fry.git
 cd fry
 make install
 ```
 
-### Arch Linux
+#### Arch Linux
 
 `fry` is also available for Arch Linux in the [AUR](https://aur.archlinux.org) as the package [fry](https://aur.archlinux.org/packages/fry/) or [fry-git](https://aur.archlinux.org/packages/fry-git/).
 To install, use your favorite AUR helper (`yaourt`, `aura`, etc.).
@@ -19,7 +41,7 @@ To install, use your favorite AUR helper (`yaourt`, `aura`, etc.).
 yaourt -S fry
 ```
 
-### OS X
+#### OS X
 
 `fry` is also available for OS X in the [homebrew](http://brew.sh) as the
 formula `fry` via [tap](https://github.com/igas/homebrew-fry).
@@ -41,7 +63,7 @@ If you have [ruby-install](https://github.com/postmodern/ruby-install) or
 with auto-completion and building to the correct destination.
 To install rubies this way, run the following command:
 
-```sh
+```fish
 # To see available rubies
 fry install
 # To install a specific ruby version
@@ -57,7 +79,7 @@ you can execute the command `fry config`.
 
 This option determines where `fry` looks for rubies.
 
-```sh
+```fish
 # To see the path
 fry config path
 # To set the path
@@ -68,7 +90,7 @@ fry config path /opt/rubies
 
 This option determines if your ruby path should be prepended or not. However it will never be at the end of your `PATH` since we are using `fish_user_paths` which is prepended to `PATH`. However if you have specified other paths inside your `fish_user_paths` then those will have higher priority. To change this behavior you can toggle this. The default behavior is append.
 
-```sh
+```fish
 # To prepend to the fish_user_paths
 fry config prepend on
 # To append to the fish_user_paths
@@ -80,7 +102,7 @@ fry config prepend off
 If you want `fry` to look for a [.ruby-version](https://gist.github.com/fnichol/1912050) file and
 automatically switch ruby on directory change then you can enable auto-switching. This is off by default.
 
-```sh
+```fish
 # To see the auto-switch status
 fry config auto
 # To enable auto-switch
@@ -101,7 +123,8 @@ per project you have to create a `.praxconfig` in your home directory or
 for pow, you need to create a `.powenv` inside every project folder.
 
 Run the following commands:
-```sh
+
+```fish
 # If you have auto-switch, it will use whatever is specified in your .ruby-version
 fry env > ~/.praxconfig
 # Specify a specific ruby to run
@@ -115,7 +138,7 @@ through this option. There are currently support for `ruby-install` and
 `ruby-build`. But you could easily define your own wrapper if you use
 some other tool.
 
-```sh
+```fish
 # To list available installer wrappers
 fry installers
 # To see the installer used
@@ -127,19 +150,22 @@ fry config installer ruby-install
 ### Default Ruby
 
 If you wish to set a default Ruby, simply call `fry` in `~/.config/fish/config.fish`:
-```sh
+
+```fish
 fry ruby-1.9
 ```
 
 If you have enabled auto-switching, simply create a `.ruby-version` file in your home directory:
-```sh
+
+```fish
 echo 'ruby-1.9' > ~/.ruby-version
 ```
 
 ## Examples
 
 List available rubies:
-```sh
+
+```fish
 fry
   system
 * 1.9.3-p392
@@ -148,13 +174,15 @@ fry
 ```
 
 Install ruby:
-```sh
+
+```fish
 fry install <tab>
 fry install 2.0.0-p247
 fry use 2.0.0-p247
 ```
 
 Get help:
-```sh
+
+```fish
 fry help
 ```
