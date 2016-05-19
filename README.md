@@ -12,16 +12,16 @@ cd fry
 make user-install
 ```
 
-#### [plug](https://github.com/terlar/fish-plug)
-
-```fish
-plug terlar/fry
-```
-
 #### [fisherman](https://github.com/fisherman/fisherman)
 
 ```fish
 fisherman terlar/fry
+```
+
+#### [plug](https://github.com/terlar/fish-plug)
+
+```fish
+plug terlar/fry
 ```
 
 ### System-wide
