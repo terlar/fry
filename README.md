@@ -15,7 +15,7 @@ make user-install
 #### [fisherman](https://github.com/fisherman/fisherman)
 
 ```fish
-fisherman terlar/fry
+fisher terlar/fry
 ```
 
 #### [plug](https://github.com/terlar/fish-plug)
