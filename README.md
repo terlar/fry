@@ -15,13 +15,13 @@ make user-install
 #### [plug](https://github.com/terlar/fish-plug)
 
 ```fish
-plug terlar/fish-plug
+plug terlar/fry
 ```
 
 #### [fisherman](https://github.com/fisherman/fisherman)
 
 ```fish
-fisherman https://github.com/terlar/fry.git
+fisherman terlar/fry
 ```
 
 ### System-wide
